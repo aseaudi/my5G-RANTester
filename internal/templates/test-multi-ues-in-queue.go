@@ -35,7 +35,7 @@ func TestMultiUesInQueue(numUes int) {
 		go ue.RegistrationUe(cfg, uint8(i), &wg)
 		wg.Add(1)
 
-		time.Sleep(10 * time.Second)
+		time.Sleep(1 * time.Second)
 	}
 
 	wg.Wait()

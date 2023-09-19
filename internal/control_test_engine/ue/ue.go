@@ -89,7 +89,7 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 		id)
 
 	// starting communication with GNB and listen.
-	err := service.InitConn2(ue)
+	err := service.InitConn2(ue, id2)
 	if err != nil {
 		log.Fatal("Error in", err)
 	} else {

@@ -21,11 +21,9 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int) {
 		log.Fatal("Error in get configuration")
 	}
 	var msin_int int
-	var msin_offset_int int
 	var new_msin_int int
 	msin_int, err = strconv.Atoi(cfg.Ue.Msin)
-	msin_offset_int, err = strconv.Atoi(cfg.Ue.msinOffset)
-	new_msin_int = msin_int + msin_offset_int
+	new_msin_int = msin_int + msinOffset
 	cfg.Ue.Msin = strconv.Itoa(new_msin_int)
 
     for j:= 1; j<=numGnbs; j++{

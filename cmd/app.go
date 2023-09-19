@@ -92,6 +92,7 @@ func main() {
 				Action: func(c *cli.Context) error {
 					var numUes int
 					var numGnbs int
+					var msinOffset int
 					name := "Testing registration of multiple UEs"
 					cfg := config.Data
 

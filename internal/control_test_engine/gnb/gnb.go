@@ -67,12 +67,12 @@ func InitGnb(conf config.Config, wg *sync.WaitGroup) {
 }
 
 func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
-	
+
 	log.Info("[GNB] Init GNB ", id)
 
 	// instance new gnb.
 	gnb := &context.GNBContext{}
-
+log.Info("[GNB] gnb := &context.GNBContext{} ")
 	// new gnb context.
 	gnb.NewRanGnbContext(
 		conf.GNodeB.PlmnList.GnbId,
@@ -85,11 +85,15 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
 		conf.GNodeB.DataIF.Ip,
 		conf.GNodeB.ControlIF.Port,
 		conf.GNodeB.DataIF.Port)
+	
+		log.Info("[GNB] gnb.NewRanGnbContext( ")
 
 	// start communication with AMF (server SCTP).
 
 	// new AMF context.
 	amf := gnb.NewGnBAmf(conf.AMF.Ip, conf.AMF.Port)
+
+	log.Info("[GNB] amf := gnb.NewGnBAmf(conf.AMF.Ip, conf.AMF.Port)	")
 
 	// start communication with AMF(SCTP).
 	if err := serviceNgap.InitConn(amf, gnb); err != nil {
@@ -99,12 +103,16 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
 		// wg.Add(1)
 	}
 
+	log.Info("[GNB] serviceNgap.InitConn(amf, gnb); err != nil	")
+
 	// start communication with UE (server UNIX sockets).
 	if err := serviceNas.InitServer2(gnb, id); err != nil {
 		log.Fatal("Error in ", err)
 	} else {
 		log.Info("[GNB] UNIX/NAS service is running")
 	}
+
+	log.Info("[GNB] serviceNas.InitServer2(gnb, id); err != nil	")
 
 	trigger.SendNgSetupRequest(gnb, amf)
 

@@ -83,7 +83,7 @@ log.Info("[GNB] gnb := &context.GNBContext{} ")
 		conf.GNodeB.SliceSupportList.Sd,
 		conf.GNodeB.ControlIF.Ip,
 		conf.GNodeB.DataIF.Ip,
-		conf.GNodeB.ControlIF.Port,
+		conf.GNodeB.ControlIF.Port + id,
 		conf.GNodeB.DataIF.Port)
 	
 		log.Info("[GNB] gnb.NewRanGnbContext( ")

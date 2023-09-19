@@ -20,6 +20,14 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int) {
 		//return nil
 		log.Fatal("Error in get configuration")
 	}
+	var msin_int int
+	var msin_offset_int int
+	var new_msin_int int
+	msin_int, err = strconv.Atoi(cfg.Ue.Msin)
+	msin_offset_int, err = strconv.Atoi(cfg.Ue.msinOffset)
+	new_msin_int = msin_int + msin_offset_int
+	cfg.Ue.Msin = strconv.Itoa(new_msin_int)
+
     for j:= 1; j<=numGnbs; j++{
 		log.Info("[TESTER] INIT GNB ", j)
 		go gnb.InitGnb2(cfg, int(j), &wg)
@@ -30,10 +38,10 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int) {
 		msin :=  cfg.Ue.Msin
 		for i := 1; i <= numUes; i++ {
 
-			imsi := imsiGenerator(i + msinOffset, msin)
+			imsi := imsiGenerator(i, msin)
 			log.Info("[TESTER] TESTING REGISTRATION USING IMSI ", imsi, " UE")
 			cfg.Ue.Msin = imsi
-			go ue.RegistrationUe2(cfg, uint8(i) + uint8(msinOffset), j, &wg)
+			go ue.RegistrationUe2(cfg, uint8(i), j, &wg)
 			wg.Add(1)
 
 			time.Sleep(4 * time.Second)

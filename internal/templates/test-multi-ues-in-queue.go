@@ -21,6 +21,7 @@ func TestMultiUesInQueue(numUes int) {
 		log.Fatal("Error in get configuration")
 	}
     for j:= 1; j<=10; j++{
+		log.Info("[TESTER] INIT GNB ", j)
 		go gnb.InitGnb2(cfg, int(j), &wg)
 
 		wg.Add(1)

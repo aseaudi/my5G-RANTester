@@ -86,14 +86,17 @@ func main() {
 					"Example for testing multiple UEs: load-test -n 5 \n",
 				Flags: []cli.Flag{
 					&cli.IntFlag{Name: "number-of-ues", Value: 1, Aliases: []string{"n"}},
+					&cli.IntFlag{Name: "number-of-gnbs", Value: 1, Aliases: []string{"g"}},
 				},
 				Action: func(c *cli.Context) error {
 					var numUes int
+					var numGnbs int
 					name := "Testing registration of multiple UEs"
 					cfg := config.Data
 
 					if c.IsSet("number-of-ues") {
 						numUes = c.Int("number-of-ues")
+						numGnbs = c.Int("number-of-gnbs")
 					} else {
 						log.Info(c.Command.Usage)
 						return nil
@@ -106,7 +109,7 @@ func main() {
 					log.Info("[TESTER][GNB] gNodeB data interface IP/Port: ", cfg.GNodeB.DataIF.Ip, "/", cfg.GNodeB.DataIF.Port)
 					log.Info("[TESTER][AMF] AMF IP/Port: ", cfg.AMF.Ip, "/", cfg.AMF.Port)
 					log.Info("---------------------------------------")
-					templates.TestMultiUesInQueue(numUes)
+					templates.TestMultiUesInQueue(numUes, numGnbs)
 
 					return nil
 				},

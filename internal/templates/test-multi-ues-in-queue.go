@@ -11,7 +11,7 @@ import (
 	"fmt"
 )
 
-func TestMultiUesInQueue(numUes int) {
+func TestMultiUesInQueue(numUes int, numGnbs int) {
 
 	wg := sync.WaitGroup{}
 
@@ -20,7 +20,7 @@ func TestMultiUesInQueue(numUes int) {
 		//return nil
 		log.Fatal("Error in get configuration")
 	}
-    for j:= 1; j<=10; j++{
+    for j:= 1; j<=numGnbs; j++{
 		log.Info("[TESTER] INIT GNB ", j)
 		go gnb.InitGnb2(cfg, int(j), &wg)
 

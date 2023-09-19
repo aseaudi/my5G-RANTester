@@ -87,6 +87,7 @@ func main() {
 				Flags: []cli.Flag{
 					&cli.IntFlag{Name: "number-of-ues", Value: 1, Aliases: []string{"n"}},
 					&cli.IntFlag{Name: "number-of-gnbs", Value: 1, Aliases: []string{"g"}},
+					&cli.IntFlag{Name: "msin-offset", Value: 1, Aliases: []string{"o"}},
 				},
 				Action: func(c *cli.Context) error {
 					var numUes int
@@ -97,6 +98,7 @@ func main() {
 					if c.IsSet("number-of-ues") {
 						numUes = c.Int("number-of-ues")
 						numGnbs = c.Int("number-of-gnbs")
+						msinOffset = c.Int("msin-offset")
 					} else {
 						log.Info(c.Command.Usage)
 						return nil
@@ -109,7 +111,7 @@ func main() {
 					log.Info("[TESTER][GNB] gNodeB data interface IP/Port: ", cfg.GNodeB.DataIF.Ip, "/", cfg.GNodeB.DataIF.Port)
 					log.Info("[TESTER][AMF] AMF IP/Port: ", cfg.AMF.Ip, "/", cfg.AMF.Port)
 					log.Info("---------------------------------------")
-					templates.TestMultiUesInQueue(numUes, numGnbs)
+					templates.TestMultiUesInQueue(numUes, numGnbs, msinOffset)
 
 					return nil
 				},

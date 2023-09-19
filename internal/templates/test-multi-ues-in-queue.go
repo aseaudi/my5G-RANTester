@@ -11,7 +11,7 @@ import (
 	"fmt"
 )
 
-func TestMultiUesInQueue(numUes int, numGnbs int) {
+func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int) {
 
 	wg := sync.WaitGroup{}
 
@@ -30,7 +30,7 @@ func TestMultiUesInQueue(numUes int, numGnbs int) {
 		msin :=  cfg.Ue.Msin
 		for i := 1; i <= numUes; i++ {
 
-			imsi := imsiGenerator(i, msin)
+			imsi := imsiGenerator(i + msinOffset, msin)
 			log.Info("[TESTER] TESTING REGISTRATION USING IMSI ", imsi, " UE")
 			cfg.Ue.Msin = imsi
 			go ue.RegistrationUe2(cfg, uint8(i), j, &wg)

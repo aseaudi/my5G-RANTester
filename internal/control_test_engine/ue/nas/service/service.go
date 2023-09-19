@@ -13,7 +13,25 @@ func CloseConn(ue *context.UEContext) {
 	conn.Close()
 }
 
-func InitConn(ue *context.UEContext, id int) error {
+func InitConn(ue *context.UEContext) error {
+
+	// initiated communication with GNB(unix sockets).
+	conn, err := net.Dial("unix", "/tmp/gnb.sock")
+	if err != nil {
+		return fmt.Errorf("[UE] Error on Dial with server", err)
+	}
+
+	// store unix socket connection in the UE.
+	ue.SetUnixConn(conn)
+
+	// listen NAS.
+	go UeListen(ue)
+
+	return nil
+}
+
+
+func InitConn2(ue *context.UEContext, id int) error {
 
 	// initiated communication with GNB(unix sockets).
 	conn, err := net.Dial("unix", "/tmp/gnb" + strconv.Itoa(id) + ".sock")
@@ -29,6 +47,7 @@ func InitConn(ue *context.UEContext, id int) error {
 
 	return nil
 }
+
 
 // ue listen unix sockets.
 func UeListen(ue *context.UEContext) {

@@ -67,6 +67,8 @@ func InitGnb(conf config.Config, wg *sync.WaitGroup) {
 }
 
 func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
+	
+	log.Info("[GNB] Init GNB ", id)
 
 	// instance new gnb.
 	gnb := &context.GNBContext{}

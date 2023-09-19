@@ -1,14 +1,16 @@
 package templates
 
 import (
-	log "github.com/sirupsen/logrus"
+	"fmt"
+	"math/rand"
 	"my5G-RANTester/config"
 	"my5G-RANTester/internal/control_test_engine/gnb"
 	"my5G-RANTester/internal/control_test_engine/ue"
 	"strconv"
 	"sync"
 	"time"
-	"fmt"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int) {
@@ -32,7 +34,7 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int) {
 
 		wg.Add(1)
 
-		time.Sleep(1 * time.Second)
+		time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 		msin :=  cfg.Ue.Msin
 		for i := 1; i <= numUes; i++ {
 

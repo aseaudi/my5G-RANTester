@@ -20,8 +20,8 @@ func TestMultiUesInQueue(numUes int) {
 		//return nil
 		log.Fatal("Error in get configuration")
 	}
-
-	go gnb.InitGnb(cfg, &wg)
+    for j:= 1; j<=10; j++{
+	go gnb.InitGnb(cfg, int(j), &wg)
 
 	wg.Add(1)
 
@@ -37,8 +37,9 @@ func TestMultiUesInQueue(numUes int) {
 
 		time.Sleep(4 * time.Second)
 	}
-
+	}
 	wg.Wait()
+
 }
 
 func imsiGenerator(i int, msin string) string {

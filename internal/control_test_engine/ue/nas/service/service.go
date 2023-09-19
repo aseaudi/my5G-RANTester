@@ -5,6 +5,7 @@ import (
 	"my5G-RANTester/internal/control_test_engine/ue/context"
 	"my5G-RANTester/internal/control_test_engine/ue/state"
 	"net"
+	"strconv"
 )
 
 func CloseConn(ue *context.UEContext) {
@@ -12,10 +13,10 @@ func CloseConn(ue *context.UEContext) {
 	conn.Close()
 }
 
-func InitConn(ue *context.UEContext) error {
+func InitConn(ue *context.UEContext, id int) error {
 
 	// initiated communication with GNB(unix sockets).
-	conn, err := net.Dial("unix", "/tmp/gnb.sock")
+	conn, err := net.Dial("unix", "/tmp/gnb" + strconv.Itoa(id) + ".sock")
 	if err != nil {
 		return fmt.Errorf("[UE] Error on Dial with server", err)
 	}

@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-func InitGnb(conf config.Config, wg *sync.WaitGroup) {
+func InitGnb(conf config.Config, id int, wg *sync.WaitGroup) {
 
 	// instance new gnb.
 	gnb := &context.GNBContext{}
@@ -46,7 +46,7 @@ func InitGnb(conf config.Config, wg *sync.WaitGroup) {
 	}
 
 	// start communication with UE (server UNIX sockets).
-	if err := serviceNas.InitServer(gnb); err != nil {
+	if err := serviceNas.InitServer(gnb, id); err != nil {
 		log.Fatal("Error in ", err)
 	} else {
 		log.Info("[GNB] UNIX/NAS service is running")

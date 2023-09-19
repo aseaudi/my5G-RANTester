@@ -2,16 +2,18 @@ package service
 
 import (
 	"fmt"
-	log "github.com/sirupsen/logrus"
 	"my5G-RANTester/internal/control_test_engine/gnb/context"
 	"my5G-RANTester/internal/control_test_engine/gnb/nas"
 	"net"
+	"strconv"
+
+	log "github.com/sirupsen/logrus"
 )
 
-func InitServer(gnb *context.GNBContext) error {
+func InitServer(gnb *context.GNBContext, id int) error {
 
 	// initiated GNB server with unix sockets.
-	ln, err := net.Listen("unix", "/tmp/gnb.sock")
+	ln, err := net.Listen("unix", "/tmp/gnb" + strconv.Itoa(id) + ".sock")
 	if err != nil {
 		fmt.Errorf("Listen error: ", err)
 	}

@@ -35,8 +35,8 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 		wg.Add(1)
 
 		
-		//time.Sleep(time.Duration(rand.Intn(10) + 1) * time.Second)
-		time.Sleep(5 * time.Second)
+		time.Sleep(time.Duration(rand.Intn(10) + 1) * time.Second)
+		//time.Sleep(5 * time.Second)
 		msin :=  cfg.Ue.Msin
 		
 		for i := 1; i <= numUes; i++ {
@@ -46,6 +46,7 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 			cfg.Ue.Msin = imsi
 			go ue.RegistrationUe2(cfg, uint8(i), j, &wg)
 			wg.Add(1)
+			log.Info("[TESTER] Wait for next UE ", regPeriod, " seconds")
 
 			time.Sleep(time.Duration(regPeriod) * time.Second)
 		}

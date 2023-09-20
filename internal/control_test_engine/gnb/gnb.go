@@ -109,11 +109,11 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
 	for sctp_ok == 0 {
 		if err := serviceNas.InitServer2(gnb, id); err != nil {
 			log.Fatal("Error in ", err)
+			time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 		} else {
 			log.Info("[GNB] UNIX/NAS service is running")
 			sctp_ok = 1
 		}
-		//time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 	}
 
 	log.Info("[GNB] About to send NG Setup Request")

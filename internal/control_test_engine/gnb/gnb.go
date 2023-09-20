@@ -107,18 +107,18 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
 	// start communication with UE (server UNIX sockets).
 	sctp_ok := 0;
 	for sctp_ok == 0 {
-	if err := serviceNas.InitServer2(gnb, id); err != nil {
-		log.Fatal("Error in ", err)
-	} else {
-		log.Info("[GNB] UNIX/NAS service is running")
-		sctp_ok = 1
+		if err := serviceNas.InitServer2(gnb, id); err != nil {
+			log.Fatal("Error in ", err)
+		} else {
+			log.Info("[GNB] UNIX/NAS service is running")
+			sctp_ok = 1
+		}
+		time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 	}
-	time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
-}
 
-
+	log.Info("[GNB] About to send NG Setup Request")
 	trigger.SendNgSetupRequest(gnb, amf)
-
+	log.Info("[GNB] Sent NG Setup Request")
 	// control the signals
 	sigGnb := make(chan os.Signal, 1)
 	signal.Notify(sigGnb, os.Interrupt)

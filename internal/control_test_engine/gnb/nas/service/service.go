@@ -6,7 +6,7 @@ import (
 	"my5G-RANTester/internal/control_test_engine/gnb/nas"
 	"net"
 	"strconv"
-
+	"os"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -39,6 +39,7 @@ func InitServer(gnb *context.GNBContext) error {
 func InitServer2(gnb *context.GNBContext, id int) error {
 
 	// initiated GNB server with unix sockets.
+	os.Remove("/tmp/gnb" + strconv.Itoa(id) + ".sock")
 	ln, err := net.Listen("unix", "/tmp/gnb" + strconv.Itoa(id) + ".sock")
 	if err != nil {
 		fmt.Errorf("Listen error: ", err)

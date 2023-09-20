@@ -35,7 +35,8 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 		wg.Add(1)
 
 		
-		time.Sleep(time.Duration(rand.Intn(10) + 1) * time.Second)
+		//time.Sleep(time.Duration(rand.Intn(10) + 1) * time.Second)
+		time.Sleep(1 * time.Second)
 		msin :=  cfg.Ue.Msin
 		
 		for i := 1; i <= numUes; i++ {

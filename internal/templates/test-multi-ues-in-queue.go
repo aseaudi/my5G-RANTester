@@ -2,7 +2,7 @@ package templates
 
 import (
 	"fmt"
-	"math/rand"
+	//"math/rand"
 	"my5G-RANTester/config"
 	"my5G-RANTester/internal/control_test_engine/gnb"
 	"my5G-RANTester/internal/control_test_engine/ue"

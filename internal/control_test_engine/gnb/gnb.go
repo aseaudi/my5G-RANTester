@@ -12,7 +12,7 @@ import (
 	"os/signal"
 	"sync"
 	"time"
-	"math/rand"
+	//"math/rand"
 )
 
 func InitGnb(conf config.Config, wg *sync.WaitGroup) {

@@ -43,6 +43,7 @@ func InitServer2(gnb *context.GNBContext, id int) error {
 	if err != nil {
 		fmt.Errorf("Listen error: ", err)
 	}
+	log.Info("[GNB] GNB unix socket /tmp/gnb" + strconv.Itoa(id) + ".sock")
 
 	gnb.SetListener(ln)
 

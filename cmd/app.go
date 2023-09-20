@@ -87,14 +87,14 @@ func main() {
 				Flags: []cli.Flag{
 					&cli.IntFlag{Name: "number-of-ues", Value: 1, Aliases: []string{"n"}},
 					&cli.IntFlag{Name: "number-of-gnbs", Value: 1, Aliases: []string{"g"}},
-					&cli.IntFlag{Name: "msin-offset", Value: 1, Aliases: []string{"o"}},
+					&cli.IntFlag{Name: "msin-offset", Value: 0, Aliases: []string{"o"}},
 					&cli.IntFlag{Name: "register-period", Value: 1, Aliases: []string{"p"}},
 				},
 				Action: func(c *cli.Context) error {
-					var numUes int = 1
-					var numGnbs int = 1
-					var msinOffset int = 0
-					var regPeriod int = 1
+					var numUes
+					var numGnbs
+					var msinOffset
+					var regPeriod
 					name := "Testing registration of multiple UEs"
 					cfg := config.Data
 

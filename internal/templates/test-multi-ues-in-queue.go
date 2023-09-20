@@ -13,7 +13,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int) {
+func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int) {
 
 	wg := sync.WaitGroup{}
 

@@ -91,10 +91,10 @@ func main() {
 					&cli.IntFlag{Name: "register-period", Value: 1, Aliases: []string{"p"}},
 				},
 				Action: func(c *cli.Context) error {
-					var numUes
-					var numGnbs
-					var msinOffset
-					var regPeriod
+					var numUes int
+					var numGnbs int
+					var msinOffset int
+					var regPeriod int
 					name := "Testing registration of multiple UEs"
 					cfg := config.Data
 

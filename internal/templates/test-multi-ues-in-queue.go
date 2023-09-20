@@ -47,7 +47,7 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int) {
 
 			time.Sleep(4 * time.Second)
 		}
-		imsi := imsiGenerator(i, msin)
+		imsi := imsiGenerator(numUes + 1, msin)
 		cfg.Ue.Msin = imsi
 	}
 	wg.Wait()

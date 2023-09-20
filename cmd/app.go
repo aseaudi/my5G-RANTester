@@ -88,11 +88,13 @@ func main() {
 					&cli.IntFlag{Name: "number-of-ues", Value: 1, Aliases: []string{"n"}},
 					&cli.IntFlag{Name: "number-of-gnbs", Value: 1, Aliases: []string{"g"}},
 					&cli.IntFlag{Name: "msin-offset", Value: 1, Aliases: []string{"o"}},
+					&cli.IntFlag{Name: "register-period", Value: 1, Aliases: []string{"p"}},
 				},
 				Action: func(c *cli.Context) error {
 					var numUes int
 					var numGnbs int
 					var msinOffset int
+					var regPeriod int
 					name := "Testing registration of multiple UEs"
 					cfg := config.Data
 
@@ -100,6 +102,7 @@ func main() {
 						numUes = c.Int("number-of-ues")
 						numGnbs = c.Int("number-of-gnbs")
 						msinOffset = c.Int("msin-offset")
+						regPeriod = c.Int("register-period")
 					} else {
 						log.Info(c.Command.Usage)
 						return nil
@@ -112,7 +115,7 @@ func main() {
 					log.Info("[TESTER][GNB] gNodeB data interface IP/Port: ", cfg.GNodeB.DataIF.Ip, "/", cfg.GNodeB.DataIF.Port)
 					log.Info("[TESTER][AMF] AMF IP/Port: ", cfg.AMF.Ip, "/", cfg.AMF.Port)
 					log.Info("---------------------------------------")
-					templates.TestMultiUesInQueue(numUes, numGnbs, msinOffset)
+					templates.TestMultiUesInQueue(numUes, numGnbs, msinOffset, regPeriod)
 
 					return nil
 				},

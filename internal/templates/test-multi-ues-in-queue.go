@@ -45,7 +45,7 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int) {
 			go ue.RegistrationUe2(cfg, uint8(i), j, &wg)
 			wg.Add(1)
 
-			time.Sleep(4 * time.Second)
+			time.Sleep(regPeriod * time.Second)
 		}
 		imsi := imsiGenerator(numUes + 1, cfg.Ue.Msin)
 		cfg.Ue.Msin = imsi

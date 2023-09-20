@@ -86,7 +86,7 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
 		conf.GNodeB.DataIF.Ip,
 		conf.GNodeB.ControlIF.Port + id,
 		conf.GNodeB.DataIF.Port)
-	
+
 	// start communication with AMF (server SCTP).
 
 	// new AMF context.
@@ -94,25 +94,27 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
 
 
 	// start communication with AMF(SCTP).
-	sctp_ok := 0;
-	for sctp_ok == 0 {
+
 		if err := serviceNgap.InitConn(amf, gnb); err != nil {
 			log.Fatal("Error in", err)
 		} else {
 			log.Info("[GNB] SCTP/NGAP service is running")
-			sctp_ok = 1
 			// wg.Add(1)
 		}
-		time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
-	}
+
 
 
 	// start communication with UE (server UNIX sockets).
+	sctp_ok := 0;
+	for sctp_ok == 0 {
 	if err := serviceNas.InitServer2(gnb, id); err != nil {
 		log.Fatal("Error in ", err)
 	} else {
 		log.Info("[GNB] UNIX/NAS service is running")
+		sctp_ok = 1
 	}
+	time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
+}
 
 
 	trigger.SendNgSetupRequest(gnb, amf)

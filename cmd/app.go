@@ -115,7 +115,7 @@ func main() {
 					log.Info("[TESTER][GNB] gNodeB data interface IP/Port: ", cfg.GNodeB.DataIF.Ip, "/", cfg.GNodeB.DataIF.Port)
 					log.Info("[TESTER][AMF] AMF IP/Port: ", cfg.AMF.Ip, "/", cfg.AMF.Port)
 					log.Info("---------------------------------------")
-					e := os.Remove("/tmp/gnb*")
+					os.Remove("/tmp/gnb*")
 					templates.TestMultiUesInQueue(numUes, numGnbs, msinOffset, regPeriod)
 
 					return nil

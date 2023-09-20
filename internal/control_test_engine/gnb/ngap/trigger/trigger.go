@@ -50,9 +50,7 @@ func SendNgSetupRequest(gnb *context.GNBContext, amf *context.GNBAmf) {
 	ngapMsg, err := interface_management.NGSetupRequest(gnb, "my5gRANTester")
 	if err != nil {
 		log.Info("[GNB][NGAP] Error sending NG Setup Request")
-
-	}
-	else {
+	} else {
 		log.Info("[GNB][NGAP] Built NG Setup Request message")
 	}
 
@@ -60,8 +58,7 @@ func SendNgSetupRequest(gnb *context.GNBContext, amf *context.GNBAmf) {
 	err = sender.SendToAmF(ngapMsg, conn)
 	if err != nil {
 		log.Info("[GNB][AMF] Error sending NG Setup Request: ", err)
-	}
-	else {
+	} else {
 		log.Info("[GNB][AMF] Sent NG Setup Request to AMF ")
 	}
 

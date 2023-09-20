@@ -93,11 +93,16 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
 
 
 	// start communication with AMF(SCTP).
-	if err := serviceNgap.InitConn(amf, gnb); err != nil {
-		log.Fatal("Error in", err)
-	} else {
-		log.Info("[GNB] SCTP/NGAP service is running")
-		// wg.Add(1)
+	sctp_ok := 0;
+	for sctp_ok == 0 {
+		if err := serviceNgap.InitConn(amf, gnb); err != nil {
+			log.Fatal("Error in", err)
+		} else {
+			log.Info("[GNB] SCTP/NGAP service is running")
+			sctp_ok = 1
+			// wg.Add(1)
+		}
+		time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 	}
 
 

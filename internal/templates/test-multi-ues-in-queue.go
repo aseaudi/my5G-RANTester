@@ -38,8 +38,8 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 		
 		time.Sleep(time.Duration(1) * time.Second)
 		msin :=  cfg.Ue.Msin
-		
-		for i := 1; i <= numUes; i++ {
+		randNumUes := rand.Int(numUes)
+		for i := 1; i <= randNumUes; i++ {
 
 			imsi := imsiGenerator(i, msin)
 			log.Info("[TESTER] TESTING REGISTRATION USING IMSI ", imsi, " UE")

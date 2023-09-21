@@ -60,7 +60,8 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 
 func imsiGenerator(i int, msin string) string {
 
-	msin_int, err := strconv.Atoi(msin)
+	//msin_int, err := strconv.Atoi(msin)
+	msin_int := rand.Intn(10000)
 	if err != nil {
 		log.Fatal("Error in get configuration")
 	}

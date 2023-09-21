@@ -2,7 +2,7 @@ package templates
 
 import (
 	"fmt"
-	//"math/rand"
+	"math/rand"
 	"my5G-RANTester/config"
 	"my5G-RANTester/internal/control_test_engine/gnb"
 	"my5G-RANTester/internal/control_test_engine/ue"
@@ -30,13 +30,13 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 
     for j:= 1; j<=numGnbs; j++{
 		log.Info("[TESTER] INIT GNB ", j)
+		time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 		go gnb.InitGnb2(cfg, int(j), &wg)
 
 		wg.Add(1)
 
 		
 		time.Sleep(time.Duration(1) * time.Second)
-		//time.Sleep(5 * time.Second)
 		msin :=  cfg.Ue.Msin
 		
 		for i := 1; i <= numUes; i++ {

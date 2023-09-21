@@ -2,7 +2,7 @@ package templates
 
 import (
 	"fmt"
-	"math/rand"
+	//"math/rand"
 	"my5G-RANTester/config"
 	"my5G-RANTester/internal/control_test_engine/gnb"
 	"my5G-RANTester/internal/control_test_engine/ue"
@@ -35,7 +35,7 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 		wg.Add(1)
 
 		
-		time.Sleep(time.Duration(rand.Intn(10) + 1) * time.Second)
+		time.Sleep(time.Duration(1) * time.Second)
 		//time.Sleep(5 * time.Second)
 		msin :=  cfg.Ue.Msin
 		

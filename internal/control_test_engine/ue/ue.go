@@ -91,7 +91,8 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 	// starting communication with GNB and listen.
 	err := service.InitConn2(ue, id2)
 	if err != nil {
-		log.Fatal("Error in", err)
+		log.Fatal("[UE] INIT CONNECT Error :", err)
+		goto exit
 	} else {
 		log.Info("[UE] UNIX/NAS service is running")
 		// wg.Add(1)
@@ -108,6 +109,7 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 
 	// Block until a signal is received.
 	<-sigUe
+	exit: 
 	ue.Terminate()
 	wg.Done()
 	// os.Exit(0)

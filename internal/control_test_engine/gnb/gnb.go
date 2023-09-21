@@ -92,16 +92,19 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
 	// new AMF context.
 	amf := gnb.NewGnBAmf(conf.AMF.Ip, conf.AMF.Port)
 
-
+	connect_ok := 0
+	for connect_ok == 0 {
 	// start communication with AMF(SCTP).
 
 		if err := serviceNgap.InitConn(amf, gnb); err != nil {
-			log.Fatal("Error in", err)
+			log.Fatal("Error in ", err)
+			time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 		} else {
 			log.Info("[GNB] SCTP/NGAP service is running")
+			connect_ok = 1
 			// wg.Add(1)
 		}
-
+	}
 
 
 	// start communication with UE (server UNIX sockets).

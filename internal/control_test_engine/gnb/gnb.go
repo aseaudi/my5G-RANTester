@@ -67,7 +67,7 @@ func InitGnb(conf config.Config, wg *sync.WaitGroup) {
 
 }
 
-func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup, ch chan string) {
+func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
 
 	log.Info("[GNB] Init GNB ", id)
 
@@ -136,7 +136,7 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup, ch chan string) {
 	// os.Exit(0)
 
 
-	
+
 	// select {
 	// 	case <-sigGnb:
 	// 		gnb.Terminate()

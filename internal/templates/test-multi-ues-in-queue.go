@@ -31,7 +31,7 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
     for j:= 1; j<=numGnbs; j++{
 		log.Info("[TESTER] INIT GNB ", j)
 		//time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
-		go gnb.InitGnb2(cfg, int(j), &wg, ch)
+		go gnb.InitGnb2(cfg, int(j), &wg)
 
 		wg.Add(1)
 

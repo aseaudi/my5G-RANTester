@@ -112,7 +112,7 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
 	for sctp_ok == 0 {
 		if err := serviceNas.InitServer2(gnb, id); err != nil {
 			log.Warn("[GNB] INIT SERVER Error :", err)
-			time.Sleep(1) * time.Second)
+			time.Sleep(1 * time.Second)
 		} else {
 			log.Info("[GNB] UNIX/NAS service is running")
 			sctp_ok = 1

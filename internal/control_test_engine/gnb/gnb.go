@@ -130,15 +130,25 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup, ch chan string) {
 	signal.Notify(sigGnb, os.Interrupt)
 
 	// Block until a signal is received.
-	select {
-		case <-sigGnb:
-			gnb.Terminate()
-			wg.Done()	
-		case <-ch:
-			gnb.Terminate()
-			wg.Done()
-	}
+	<-sigGnb
+	gnb.Terminate()
+	wg.Done()	
 	// os.Exit(0)
+
+
+	
+	// select {
+	// 	case <-sigGnb:
+	// 		gnb.Terminate()
+	// 		wg.Done()	
+	// 	case <-ch:
+	// 		gnb.Terminate()
+	// 		wg.Done()
+	// }
+
+
+
+
 
 }
 

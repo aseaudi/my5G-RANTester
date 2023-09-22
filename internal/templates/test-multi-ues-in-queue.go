@@ -16,7 +16,7 @@ import (
 func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int) {
 	rand.Seed(time.Now().UnixNano())
 	wg := sync.WaitGroup{}
-	ch := make(chan string)
+	//ch := make(chan string)
 	cfg, err := config.GetConfig()
 	if err != nil {
 		//return nil

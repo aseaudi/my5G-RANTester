@@ -107,13 +107,11 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 	// wg.Wait()
 
 	// control the signals
-	// sigUe := make(chan os.Signal, 1)
-	// signal.Notify(sigUe, os.Interrupt)
+	sigUe := make(chan os.Signal, 1)
+	signal.Notify(sigUe, os.Interrupt)
 
-	// // Block until a signal is received.
-	// <-sigUe
-
-	time.Sleep(5 * time.Second)
+	// Block until a signal is received.
+	<-sigUe
 	ue.Terminate()
 	wg.Done()
 	// os.Exit(0)

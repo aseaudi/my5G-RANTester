@@ -89,14 +89,18 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 		id)
 
 	// starting communication with GNB and listen.
+	ue_connect := 0
+	for ue_connect == 0 {
 	err := service.InitConn2(ue, id2)
 	if err != nil {
-		log.Fatal("[UE] INIT CONNECT Error :", err)
+		log.Warn("[UE] INIT CONNECT Error : ", err)
+		time.Sleep(1 * time.Second)
 	} else {
 		log.Info("[UE] UNIX/NAS service is running")
+		ue_connect = 1
 		// wg.Add(1)
 	}
-
+	}
 	// registration procedure started.
 	trigger.InitRegistration(ue)
 

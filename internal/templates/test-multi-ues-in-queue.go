@@ -67,7 +67,7 @@ func imsiGenerator(i int, msin string) string {
 	// if err != nil {
 	// 	log.Fatal("Error in get configuration")
 	// }
-	msin_int := rand.Intn(10000)
+	msin_int := rand.Intn(3000)
 	base := msin_int + (i -1)
 
 	imsi := fmt.Sprintf("%010d", base)

@@ -67,7 +67,7 @@ func InitGnb(conf config.Config, wg *sync.WaitGroup) {
 
 }
 
-func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
+func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup, ch chan string) {
 
 	log.Info("[GNB] Init GNB ", id)
 
@@ -124,14 +124,20 @@ func InitGnb2(conf config.Config, id int, wg *sync.WaitGroup) {
 	log.Info("[GNB] About to send NG Setup Request")
 	trigger.SendNgSetupRequest(gnb, amf)
 	log.Info("[GNB] Sent NG Setup Request")
+	
 	// control the signals
 	sigGnb := make(chan os.Signal, 1)
 	signal.Notify(sigGnb, os.Interrupt)
 
 	// Block until a signal is received.
-	<-sigGnb
-	gnb.Terminate()
-	wg.Done()
+	select {
+		case <-sigGnb:
+			gnb.Terminate()
+			wg.Done()	
+		case <-ch:
+			gnb.Terminate()
+			wg.Done()
+	}
 	// os.Exit(0)
 
 }

@@ -16,7 +16,7 @@ import (
 func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int) {
 	rand.Seed(time.Now().UnixNano())
 	wg := sync.WaitGroup{}
-
+	ch := make(chan string)
 	cfg, err := config.GetConfig()
 	if err != nil {
 		//return nil
@@ -31,7 +31,7 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
     for j:= 1; j<=numGnbs; j++{
 		log.Info("[TESTER] INIT GNB ", j)
 		//time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
-		go gnb.InitGnb2(cfg, int(j), &wg)
+		go gnb.InitGnb2(cfg, int(j), &wg, ch)
 
 		wg.Add(1)
 
@@ -53,6 +53,9 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 		}
 		imsi := imsiGenerator(numUes + 1, cfg.Ue.Msin)
 		cfg.Ue.Msin = imsi
+		
+		ch<-"ues done"
+
 	}
 	wg.Wait()
 

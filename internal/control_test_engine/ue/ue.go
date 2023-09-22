@@ -93,10 +93,10 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 	for ue_connect == 0 {
 	err := service.InitConn2(ue, id2)
 	if err != nil {
-		log.Warn("[UE] INIT CONNECT Error : ", err)
+		log.Warn("[UE] UE ", id, " INIT CONNECT Error : ", err)
 		time.Sleep(1 * time.Second)
 	} else {
-		log.Info("[UE] UNIX/NAS service is running")
+		log.Info("[UE] UE ", id, " UNIX/NAS service is running")
 		ue_connect = 1
 		// wg.Add(1)
 	}

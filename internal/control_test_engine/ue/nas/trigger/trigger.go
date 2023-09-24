@@ -28,7 +28,7 @@ func DeRegister(ue *context.UEContext) {
 
 	// deregistration procedure started.
 	deRegistrationRequest := mm_5gs.GetDeRegistrationRequest(
-		nasMessage.DeregistrationRequestUEOriginatingDeregistration,
+		0x03,
 		nil,
 		nil,
 		false,

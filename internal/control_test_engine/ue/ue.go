@@ -107,17 +107,17 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 	// wg.Wait()
 
 	// wait for a random time, then deregister ue
-	log.Info("[UE] UE ", id, " registered, wait 60 seconds then deregister")
-	time.Sleep(60 * time.Second)
-	trigger.DeRegister(ue)
-	log.Info("[UE] UE ", id, " deregistered")
+	//log.Info("[UE] UE ", id, " registered, wait 60 seconds then deregister")
+	//time.Sleep(60 * time.Second)
+	//trigger.DeRegister(ue)
+	//log.Info("[UE] UE ", id, " deregistered")
 
-	// // control the signals
-	// sigUe := make(chan os.Signal, 1)
-	// signal.Notify(sigUe, os.Interrupt)
+	// control the signals
+	sigUe := make(chan os.Signal, 1)
+	signal.Notify(sigUe, os.Interrupt)
 
-	// // Block until a signal is received.
-	// <-sigUe
+	// Block until a signal is received.
+	<-sigUe
 	ue.Terminate()
 	wg.Done()
 	// os.Exit(0)

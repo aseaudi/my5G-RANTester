@@ -112,12 +112,12 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 	trigger.DeRegister(ue)
 	log.Info("[UE] UE ", id, " deregistered")
 
-	// control the signals
-	sigUe := make(chan os.Signal, 1)
-	signal.Notify(sigUe, os.Interrupt)
+	// // control the signals
+	// sigUe := make(chan os.Signal, 1)
+	// signal.Notify(sigUe, os.Interrupt)
 
-	// Block until a signal is received.
-	<-sigUe
+	// // Block until a signal is received.
+	// <-sigUe
 	ue.Terminate()
 	wg.Done()
 	// os.Exit(0)

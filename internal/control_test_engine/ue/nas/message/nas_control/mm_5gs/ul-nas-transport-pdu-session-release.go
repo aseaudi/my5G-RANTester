@@ -11,6 +11,7 @@ import (
 	"my5G-RANTester/lib/nas/nasMessage"
 	"my5G-RANTester/lib/nas/nasType"
 	"my5G-RANTester/lib/openapi/models"
+	
 )
 
 func UlNasTransport2(ue *context.UEContext, requestType uint8) ([]byte, error) {

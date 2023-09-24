@@ -8,6 +8,7 @@ import (
 	//"my5G-RANTester/lib/nas/nasConvert"
 	"my5G-RANTester/lib/nas/nasMessage"
 	"my5G-RANTester/lib/nas/nasType"
+	log "github.com/sirupsen/logrus"
 )
 
 func GetPduSessionReleaseRequest(pduSessionId uint8) (nasPdu []byte) {

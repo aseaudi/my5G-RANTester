@@ -6,7 +6,6 @@ import (
 	"my5G-RANTester/lib/nas"
 
 	//"my5G-RANTester/lib/nas/nasConvert"
-	nasType "command-line-arguments/Users/aseaudi/src/github/my5G-RANTester/lib/nas/nasType/NAS_Cause5GSM.go"
 	"my5G-RANTester/lib/nas/nasMessage"
 	//"my5G-RANTester/lib/nas/nasType"
 )

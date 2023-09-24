@@ -4,7 +4,9 @@ import (
 	"bytes"
 	"fmt"
 	"my5G-RANTester/lib/nas"
+
 	//"my5G-RANTester/lib/nas/nasConvert"
+	nasType "command-line-arguments/Users/aseaudi/src/github/my5G-RANTester/lib/nas/nasType/NAS_Cause5GSM.go"
 	"my5G-RANTester/lib/nas/nasMessage"
 	//"my5G-RANTester/lib/nas/nasType"
 )
@@ -20,6 +22,7 @@ func GetPduSessionReleaseRequest(pduSessionId uint8) (nasPdu []byte) {
 	pduSessionReleaseRequest.SetMessageType(nas.MsgTypePDUSessionReleaseRequest)
 	pduSessionReleaseRequest.PDUSessionID.SetPDUSessionID(pduSessionId)
 	pduSessionReleaseRequest.PTI.SetPTI(0x01)
+	pduSessionReleaseRequest.Cause5GSM = nasMessage.NewCause5GSM(nasMessage.PDUSessionReleaseRequestCause5GSMType)
 	pduSessionReleaseRequest.Cause5GSM.SetCauseValue(36)
 	// pduSessionReleaseRequest.IntegrityProtectionMaximumDataRate.SetMaximumDataRatePerUEForUserPlaneIntegrityProtectionForDownLink(0xff)
 	// pduSessionReleaseRequest.IntegrityProtectionMaximumDataRate.SetMaximumDataRatePerUEForUserPlaneIntegrityProtectionForUpLink(0xff)

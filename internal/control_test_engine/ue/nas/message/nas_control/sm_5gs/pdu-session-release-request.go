@@ -21,7 +21,7 @@ func GetPduSessionReleaseRequest(pduSessionId uint8) (nasPdu []byte) {
 	pduSessionReleaseRequest.SetMessageType(nas.MsgTypePDUSessionReleaseRequest)
 	pduSessionReleaseRequest.PDUSessionID.SetPDUSessionID(pduSessionId)
 	pduSessionReleaseRequest.PTI.SetPTI(0x01)
-	pduSessionReleaseRequest.PDUSESSIONRELEASEREQUESTMessageIdentity = nasType.NewPDUSESSIONRELEASEREQUESTMessageIdentity(209)
+	pduSessionReleaseRequest.PDUSESSIONRELEASEREQUESTMessageIdentity = *nasType.NewPDUSESSIONRELEASEREQUESTMessageIdentity(209)
 	//pduSessionReleaseRequest.PDUSESSIONRELEASEREQUESTMessageIdentity.SetMessageType(209)
 	pduSessionReleaseRequest.Cause5GSM = nasType.NewCause5GSM(nasMessage.PDUSessionReleaseRequestCause5GSMType)
 	pduSessionReleaseRequest.Cause5GSM.SetCauseValue(36)

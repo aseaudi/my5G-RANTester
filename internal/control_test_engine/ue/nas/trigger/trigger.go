@@ -11,7 +11,7 @@ func InitRegistration(ue *context.UEContext) {
 
 	// registration procedure started.
 	registrationRequest := mm_5gs.GetRegistrationRequest(
-		nasMessage.RegistrationType5GSInitialRegistration,
+		0x03,
 		nil,
 		nil,
 		false,

@@ -8,7 +8,7 @@ type PDUSESSIONRELEASEREQUESTMessageIdentity struct {
 
 func NewPDUSESSIONRELEASEREQUESTMessageIdentity(messageType uint8) (pDUSESSIONRELEASEREQUESTMessageIdentity *PDUSESSIONRELEASEREQUESTMessageIdentity) {
 	pDUSESSIONRELEASEREQUESTMessageIdentity = &PDUSESSIONRELEASEREQUESTMessageIdentity{}
-	pDUSESSIONRELEASEREQUESTMessageIdentity.SetMessageType(209)
+	pDUSESSIONRELEASEREQUESTMessageIdentity.SetMessageType(messageType)
 	return pDUSESSIONRELEASEREQUESTMessageIdentity
 }
 

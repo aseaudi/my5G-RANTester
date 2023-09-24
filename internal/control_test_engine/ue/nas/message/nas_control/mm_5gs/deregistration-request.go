@@ -41,7 +41,7 @@ func GetDeRegistrationRequest(registrationType uint8, requestedNSSAI *nasType.Re
 
 	//deregistrationRequest.SetFOR(1)
 
-	m.GmmMessage.RegistrationRequest = deregistrationRequest
+	m.GmmMessage.DeregistrationRequestUEOriginatingDeregistration = deregistrationRequest
 
 	data := new(bytes.Buffer)
 	err := m.GmmMessageEncode(data)

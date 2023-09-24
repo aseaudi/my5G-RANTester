@@ -20,13 +20,14 @@ func GetPduSessionReleaseRequest(pduSessionId uint8) (nasPdu []byte) {
 	pduSessionReleaseRequest.SetMessageType(nas.MsgTypePDUSessionReleaseRequest)
 	pduSessionReleaseRequest.PDUSessionID.SetPDUSessionID(pduSessionId)
 	pduSessionReleaseRequest.PTI.SetPTI(0x01)
+	pduSessionReleaseRequest.Cause5GSM.SetCauseValue(36)
 	// pduSessionReleaseRequest.IntegrityProtectionMaximumDataRate.SetMaximumDataRatePerUEForUserPlaneIntegrityProtectionForDownLink(0xff)
 	// pduSessionReleaseRequest.IntegrityProtectionMaximumDataRate.SetMaximumDataRatePerUEForUserPlaneIntegrityProtectionForUpLink(0xff)
 
-	// pduSessionReleaseRequest.PDUSessionType = nasType.NewPDUSessionType(nasMessage.PDUSessionEstablishmentRequestPDUSessionTypeType)
+	// pduSessionReleaseRequest.PDUSessionType = nasType.NewPDUSessionType(nasMessage.PDUSessionReleaseRequestPDUSessionTypeType)
 	// pduSessionReleaseRequest.PDUSessionType.SetPDUSessionTypeValue(uint8(0x01)) //IPv4 type
 
-	// pduSessionReleaseRequest.ExtendedProtocolConfigurationOptions = nasType.NewExtendedProtocolConfigurationOptions(nasMessage.PDUSessionEstablishmentRequestExtendedProtocolConfigurationOptionsType)
+	// pduSessionReleaseRequest.ExtendedProtocolConfigurationOptions = nasType.NewExtendedProtocolConfigurationOptions(nasMessage.PDUSessionReleaseRequestExtendedProtocolConfigurationOptionsType)
 	// protocolConfigurationOptions := nasConvert.NewProtocolConfigurationOptions()
 	// protocolConfigurationOptions.AddIPAddressAllocationViaNASSignallingUL()
 	// protocolConfigurationOptions.AddDNSServerIPv4AddressRequest()

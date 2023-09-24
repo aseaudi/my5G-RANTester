@@ -107,8 +107,8 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 	// wg.Wait()
 
 	// wait for a random time, then deregister ue
-	log.Info("[UE] UE ", id, " registered, wait 30 seconds then deregister")
-	time.Sleep(30 * time.Second)
+	log.Info("[UE] UE ", id, " registered, wait 60 seconds then deregister")
+	time.Sleep(60 * time.Second)
 	trigger.DeRegister(ue)
 	log.Info("[UE] UE ", id, " deregistered")
 

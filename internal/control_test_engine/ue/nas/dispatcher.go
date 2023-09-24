@@ -1,12 +1,14 @@
 package nas
 
 import (
-	log "github.com/sirupsen/logrus"
 	"my5G-RANTester/internal/control_test_engine/ue/context"
 	"my5G-RANTester/internal/control_test_engine/ue/nas/handler"
 	"my5G-RANTester/lib/nas"
 	"my5G-RANTester/lib/nas/security"
 	"reflect"
+	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func DispatchNas(ue *context.UEContext, message []byte) {
@@ -154,6 +156,9 @@ func DispatchNas(ue *context.UEContext, message []byte) {
 		// handler DL NAS Transport.
 		log.Info("[UE][NAS] Receive DL NAS Transport")
 		handler.HandlerDlNasTransportPduaccept(ue, m)
+		// sleep 30 seconds and send context release idle
+		time.Sleep(30 * time.Second)
+		handler.HandlerContextReleaseIdle(ue)
 
 	case nas.MsgTypeRegistrationReject:
 		// handler registration reject

@@ -161,3 +161,38 @@ func HandlerDlNasTransportPduaccept(ue *context.UEContext, message *nas.Message)
 		ue.SetIp(UeIp)
 	}
 }
+
+func HandlerContextReleaseIdle(ue *context.UEContext) {
+
+
+
+	// getting ul nas transport and pduSession release request.
+	ulNasTransport, err := mm_5gs.UlNasTransport2(ue, nasMessage.ULNASTransportRequestTypeExistingPduSession)
+	if err != nil {
+		log.Fatal("[UE][NAS] Error sending ul nas transport and pdu session establishment request: ", err)
+	}
+
+
+	// // getting Context Release Dle.
+	// contextReleaseIdle, err := mm_5gs.ContextReleaseIdle(ue)
+	// if err != nil {
+	// 	log.Fatal("[UE][NAS] Error building context release idle: ", err)
+	// }
+
+	// sending to GNB
+	sender.SendToGnb(ue, ulNasTransport)
+
+	// // waiting receive Context Release Command.
+	// time.Sleep(100 * time.Millisecond)
+	// contextReleaseIdleComplete, err := mm_5gs.ContextReleaseIdleComplete(ue)
+	// if err != nil {
+	// 	log.Fatal("[UE][NAS] Error building context release idle complete: ", err)
+	// }
+
+	// // sending to GNB
+	// sender.SendToGnb(ue, contextReleaseIdleComplete)
+
+	// change the state of ue(SM)(PDU Session InActive).
+	ue.SetStateSM_PDU_SESSION_INACTIVE()
+
+}

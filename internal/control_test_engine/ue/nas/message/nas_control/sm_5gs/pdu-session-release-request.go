@@ -11,7 +11,7 @@ import (
 )
 
 func GetPduSessionReleaseRequest(pduSessionId uint8) (nasPdu []byte) {
-
+	log.Info("GetPduSessionRelease Request")
 	m := nas.NewMessage()
 	m.GsmMessage = nas.NewGsmMessage()
 	m.GsmHeader.SetMessageType(nas.MsgTypePDUSessionReleaseRequest)
@@ -48,6 +48,7 @@ func GetPduSessionReleaseRequest(pduSessionId uint8) (nasPdu []byte) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	log.Info("gsm encoded pdu session release request")
 
 	nasPdu = data.Bytes()
 	return

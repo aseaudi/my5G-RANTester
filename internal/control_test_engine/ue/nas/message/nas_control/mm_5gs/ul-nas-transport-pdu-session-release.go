@@ -14,21 +14,22 @@ import (
 )
 
 func UlNasTransport2(ue *context.UEContext, requestType uint8) ([]byte, error) {
-
+	log.Info("UL NAS Transport 2")
 	pdu := getUlNasTransport_PduSessionReleaseRequest(ue.PduSession.Id, requestType, ue.PduSession.Dnn, &ue.PduSession.Snssai)
 	if pdu == nil {
 		return nil, fmt.Errorf("Error encoding %s IMSI UE PduSession Release Request Msg", ue.UeSecurity.Supi)
 	}
+	log.Info("UL NAS Transport 2 - created pdu")
 	pdu, err := nas_control.EncodeNasPduWithSecurity(ue, pdu, nas.SecurityHeaderTypeIntegrityProtectedAndCiphered, true, false)
 	if err != nil {
 		return nil, fmt.Errorf("Error encoding %s IMSI UE PduSession Release Request Msg", ue.UeSecurity.Supi)
 	}
-
+	log.Info("UL NAS Transport 2 - encoded pdu with security")
 	return pdu, nil
 }
 
 func getUlNasTransport_PduSessionReleaseRequest(pduSessionId uint8, requestType uint8, dnnString string, sNssai *models.Snssai) (nasPdu []byte) {
-
+	log.Info("getULNASTRansport Pdu session release request")
 	pduSessionReleaseRequest := sm_5gs.GetPduSessionReleaseRequest(pduSessionId)
 
 	m := nas.NewMessage()
@@ -79,6 +80,7 @@ func getUlNasTransport_PduSessionReleaseRequest(pduSessionId uint8, requestType 
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	log.Info("gmm encoded data pdu session release")
 
 	nasPdu = data.Bytes()
 	return

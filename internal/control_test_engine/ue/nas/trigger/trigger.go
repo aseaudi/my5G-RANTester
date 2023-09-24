@@ -28,7 +28,7 @@ func DeRegister(ue *context.UEContext) {
 
 	// deregistration procedure started.
 	deRegistrationRequest := mm_5gs.GetDeRegistrationRequest(
-		0x03,
+		0x09,
 		nil,
 		nil,
 		false,

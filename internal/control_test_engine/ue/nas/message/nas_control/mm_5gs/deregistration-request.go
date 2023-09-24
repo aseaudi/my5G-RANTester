@@ -22,9 +22,9 @@ func GetDeRegistrationRequest(registrationType uint8, requestedNSSAI *nasType.Re
 	deregistrationRequest.SpareHalfOctetAndSecurityHeaderType.SetSecurityHeaderType(nas.SecurityHeaderTypePlainNas)
 	deregistrationRequest.SpareHalfOctetAndSecurityHeaderType.SetSpareHalfOctet(0x00)
 	deregistrationRequest.DeregistrationRequestMessageIdentity.SetMessageType(nas.MsgTypeDeregistrationRequestUEOriginatingDeregistration)
-	// deregistrationRequest.NgksiAndRegistrationType5GS.SetTSC(nasMessage.TypeOfSecurityContextFlagNative)
-	// deregistrationRequest.NgksiAndRegistrationType5GS.SetNasKeySetIdentifiler(ue.GetUeId())
-	// deregistrationRequest.NgksiAndRegistrationType5GS.SetRegistrationType5GS(registrationType)
+	deregistrationRequest.NgksiAndRegistrationType5GS.SetTSC(nasMessage.TypeOfSecurityContextFlagNative)
+	deregistrationRequest.NgksiAndRegistrationType5GS.SetNasKeySetIdentifiler(ue.GetUeId())
+	deregistrationRequest.NgksiAndRegistrationType5GS.SetRegistrationType5GS(registrationType)
 	deregistrationRequest.MobileIdentity5GS = ue.GetSuci()
 	// if capability {
 	// 	deregistrationRequest.Capability5GMM = &nasType.Capability5GMM{

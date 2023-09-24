@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"fmt"
 	"my5G-RANTester/lib/nas"
-	"my5G-RANTester/lib/nas/nasConvert"
+	//"my5G-RANTester/lib/nas/nasConvert"
 	"my5G-RANTester/lib/nas/nasMessage"
-	"my5G-RANTester/lib/nas/nasType"
+	//"my5G-RANTester/lib/nas/nasType"
 )
 
 func GetPduSessionReleaseRequest(pduSessionId uint8) (nasPdu []byte) {
@@ -36,7 +36,7 @@ func GetPduSessionReleaseRequest(pduSessionId uint8) (nasPdu []byte) {
 	// pduSessionReleaseRequest.ExtendedProtocolConfigurationOptions.SetLen(uint16(pcoContentsLength))
 	// pduSessionReleaseRequest.ExtendedProtocolConfigurationOptions.SetExtendedProtocolConfigurationOptionsContents(pcoContents)
 
-	m.GsmMessage.PDUSessionEstablishmentRequest = pduSessionReleaseRequest
+	m.GsmMessage.PDUSessionReleaseRequest = pduSessionReleaseRequest
 
 	data := new(bytes.Buffer)
 	err := m.GsmMessageEncode(data)

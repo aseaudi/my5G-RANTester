@@ -11,7 +11,7 @@ import (
 
 func GetDeRegistrationRequest(registrationType uint8, requestedNSSAI *nasType.RequestedNSSAI, uplinkDataStatus *nasType.UplinkDataStatus, capability bool, ue *context.UEContext) (nasPdu []byte) {
 
-	ueSecurityCapability := context.SetUESecurityCapability(ue)
+	//ueSecurityCapability := context.SetUESecurityCapability(ue)
 
 	m := nas.NewMessage()
 	m.GmmMessage = nas.NewGmmMessage()

@@ -171,7 +171,7 @@ func HandlerContextReleaseIdle(ue *context.UEContext) {
 	if err != nil {
 		log.Fatal("[UE][NAS] Error sending ul nas transport and pdu session establishment request: ", err)
 	}
-
+	log.Info("[UE][NAS] Created UL NAS Transport for PDU Session Release")
 
 	// // getting Context Release Dle.
 	// contextReleaseIdle, err := mm_5gs.ContextReleaseIdle(ue)
@@ -181,6 +181,7 @@ func HandlerContextReleaseIdle(ue *context.UEContext) {
 
 	// sending to GNB
 	sender.SendToGnb(ue, ulNasTransport)
+	log.Info("[UE][NAS] Sent UL NAS Transport for PDU Session Release to GNB")
 
 	// // waiting receive Context Release Command.
 	// time.Sleep(100 * time.Millisecond)

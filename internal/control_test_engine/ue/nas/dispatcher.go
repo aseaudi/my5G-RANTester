@@ -157,8 +157,10 @@ func DispatchNas(ue *context.UEContext, message []byte) {
 		log.Info("[UE][NAS] Receive DL NAS Transport")
 		handler.HandlerDlNasTransportPduaccept(ue, m)
 		// sleep 30 seconds and send context release idle
+		log.Info("[UE][NAS] Handled PDU Session Establishment accept, waiting 30 seconds to Pdu release idle")
 		time.Sleep(30 * time.Second)
 		handler.HandlerContextReleaseIdle(ue)
+		log.Info("[UE][NAS] Handled PDU release idle")
 
 	case nas.MsgTypeRegistrationReject:
 		// handler registration reject

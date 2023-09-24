@@ -23,3 +23,20 @@ func InitRegistration(ue *context.UEContext) {
 	// change the state of ue for deregistered
 	ue.SetStateMM_DEREGISTERED()
 }
+
+func DeRegister(ue *context.UEContext) {
+
+	// deregistration procedure started.
+	deRegistrationRequest := mm_5gs.GetDeRegistrationRequest(
+		nasMessage.DeregistrationRequestUEOriginatingDeregistration,
+		nil,
+		nil,
+		false,
+		ue)
+
+	// send to GNB.
+	sender.SendToGnb(ue, deRegistrationRequest)
+
+	// change the state of ue for deregistered
+	ue.SetStateMM_DEREGISTERED()
+}

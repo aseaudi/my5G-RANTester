@@ -10,7 +10,7 @@ type PDUSessionReleaseRequest struct {
 	nasType.ExtendedProtocolDiscriminator
 	nasType.PDUSessionID
 	nasType.PTI
-	nasType.PDUSESSIONRELEASEREQUESTMessageIdentity
+	*nasType.PDUSESSIONRELEASEREQUESTMessageIdentity
 	*nasType.Cause5GSM
 	*nasType.ExtendedProtocolConfigurationOptions
 }

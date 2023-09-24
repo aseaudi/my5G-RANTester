@@ -39,7 +39,7 @@ func GetDeRegistrationRequest(registrationType uint8, requestedNSSAI *nasType.Re
 	// deregistrationRequest.RequestedNSSAI = requestedNSSAI
 	// deregistrationRequest.UplinkDataStatus = uplinkDataStatus
 
-	deregistrationRequest.SetFOR(1)
+	//deregistrationRequest.SetFOR(1)
 
 	m.GmmMessage.RegistrationRequest = deregistrationRequest
 

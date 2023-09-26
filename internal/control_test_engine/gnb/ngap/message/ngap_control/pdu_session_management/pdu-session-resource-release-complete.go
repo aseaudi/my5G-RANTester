@@ -32,7 +32,7 @@ func buildPDUSessionResourceSetupResponseForRegistrationTest(amfUeNgapID, ranUeN
 	successfulOutcome.Criticality.Value = ngapType.CriticalityPresentReject
 
 	successfulOutcome.Value.Present = ngapType.SuccessfulOutcomePresentPDUSessionResourceReleaseResponse
-	successfulOutcome.Value.PDUSessionResourceRelease = new(ngapType.PDUSessionResourceRelease)
+	successfulOutcome.Value.PDUSessionResourceReleaseResponse = new(ngapType.PDUSessionResourceReleaseResponse)
 
 	pDUSessionResourceSetupResponse := successfulOutcome.Value.PDUSessionResourceReleaseResponse
 	pDUSessionResourceSetupResponseIEs := &pDUSessionResourceSetupResponse.ProtocolIEs

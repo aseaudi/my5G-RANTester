@@ -42,7 +42,7 @@ func GetPduSessionReleaseComplete(pduSessionId uint8) (nasPdu []byte) {
 	// pduSessionReleaseRequest.ExtendedProtocolConfigurationOptions.SetLen(uint16(pcoContentsLength))
 	// pduSessionReleaseRequest.ExtendedProtocolConfigurationOptions.SetExtendedProtocolConfigurationOptionsContents(pcoContents)
 
-	m.GsmMessage.PDUSessionReleaseRequest = pduSessionReleaseRequest
+	m.GsmMessage.PDUSessionReleaseComplete = pduSessionReleaseRequest
 
 	data := new(bytes.Buffer)
 	err := m.GsmMessageEncode(data)

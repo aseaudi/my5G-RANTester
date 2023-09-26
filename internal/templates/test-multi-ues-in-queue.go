@@ -38,7 +38,7 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 		
 		time.Sleep(time.Duration(1) * time.Second)
 		msin :=  cfg.Ue.Msin
-		randNumUes := rand.Intn(numUes)
+		randNumUes := rand.Intn(numUes) + 1
 		log.Info("[TESTER] TESTING Random Number of UEs = ", randNumUes)
 		for i := 1; i <= randNumUes; i++ {
 

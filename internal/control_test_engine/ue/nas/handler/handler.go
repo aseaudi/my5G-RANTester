@@ -132,7 +132,7 @@ func HandlerRegistrationAccept(ue *context.UEContext, message *nas.Message) {
 	log.Info("[UE][NAS] Wait for Configuration Update Command")
 	
 	// waiting receive Configuration Update Command.
-	time.Sleep(2000 * time.Millisecond)
+	time.Sleep(20 * time.Millisecond)
 
 	// getting ul nas transport and pduSession establishment request.
 	ulNasTransport, err := mm_5gs.UlNasTransport(ue, nasMessage.ULNASTransportRequestTypeInitialRequest)
@@ -155,7 +155,7 @@ func HandlerDlNasTransportPduaccept(ue *context.UEContext, message *nas.Message)
 	//getting PDU Session establishment accept.
 	payloadContainer := nas_control.GetNasPduFromPduAccept(message)
 	if payloadContainer.GsmHeader.GetMessageType() == nas.MsgTypePDUSessionEstablishmentAccept {
-		log.Info("[UE][NAS] Receiving PDU Session Establishment Accept")
+		log.Info("[UE][NAS] Received NAS PDU Session Establishment Accept")
 
 		// update PDU Session information.
 

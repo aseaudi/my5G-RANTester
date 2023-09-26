@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"my5G-RANTester/internal/control_test_engine/ue/nas/trigger/trigger"
+	"my5G-RANTester/internal/control_test_engine/ue/nas/trigger"
 	"fmt"
 	"my5G-RANTester/internal/control_test_engine/ue/context"
 	"my5G-RANTester/internal/control_test_engine/ue/nas/message/nas_control"

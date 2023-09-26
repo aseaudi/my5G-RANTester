@@ -8,7 +8,7 @@ import (
 )
 
 func HandlerUeInitialized(ue *context.GNBUe, message []byte, gnb *context.GNBContext) {
-
+	log.Info("[GNB][NAS] Handler for UE Initialized")
 	// encode NAS message in NGAP.
 	ngap, err := nas_transport.SendInitialUeMessage(message, ue, gnb)
 	if err != nil {
@@ -27,6 +27,7 @@ func HandlerUeInitialized(ue *context.GNBUe, message []byte, gnb *context.GNBCon
 }
 
 func HandlerUeOngoing(ue *context.GNBUe, message []byte, gnb *context.GNBContext) {
+	log.Info("[GNB][NAS] Handler for UE Ongoing")
 
 	ngap, err := nas_transport.SendUplinkNasTransport(message, ue, gnb)
 	if err != nil {
@@ -42,6 +43,7 @@ func HandlerUeOngoing(ue *context.GNBUe, message []byte, gnb *context.GNBContext
 }
 
 func HandlerUeReady(ue *context.GNBUe, message []byte, gnb *context.GNBContext) {
+	log.Info("[GNB][NAS] Handler for UE Ready")
 
 	// receive UE ip or other messages.
 

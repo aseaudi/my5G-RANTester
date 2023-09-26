@@ -55,3 +55,17 @@ func PDUSessionRelease(ue *context.UEContext) {
 	// change the state of ue for deregistered
 	ue.SetStateMM_DEREGISTERED()
 }
+
+func PDUSessionReleaseComplete(ue *context.UEContext) {
+
+	// deregistration procedure started.
+	pduSessionReleaseComplete, err := mm_5gs.UlNasTransport2(ue, nasMessage.ULNASTransportRequestTypeExistingPduSession)
+    if err != nil {
+		log.Fatal("Error ")
+	}
+	// send to GNB.
+	sender.SendToGnb(ue, pduSessionReleaseComplete)
+
+	// change the state of ue for deregistered
+	ue.SetStateMM_DEREGISTERED()
+}

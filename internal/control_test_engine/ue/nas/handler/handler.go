@@ -1,8 +1,8 @@
 package handler
 
 import (
+	"command-line-arguments/Users/aseaudi/src/github/my5G-RANTester/internal/control_test_engine/gnb/ngap/trigger/trigger.go"
 	"fmt"
-	log "github.com/sirupsen/logrus"
 	"my5G-RANTester/internal/control_test_engine/ue/context"
 	"my5G-RANTester/internal/control_test_engine/ue/nas/message/nas_control"
 	"my5G-RANTester/internal/control_test_engine/ue/nas/message/nas_control/mm_5gs"
@@ -10,6 +10,8 @@ import (
 	"my5G-RANTester/lib/nas"
 	"my5G-RANTester/lib/nas/nasMessage"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func HandlerAuthenticationReject(ue *context.UEContext, message *nas.Message) {
@@ -161,7 +163,20 @@ func HandlerDlNasTransportPduaccept(ue *context.UEContext, message *nas.Message)
 
 		// change the state of ue(SM)(PDU Session Active).
 		ue.SetStateSM_PDU_SESSION_ACTIVE()
-		log.Info("[UE] Changed UE State to PDU SESSION aCTIVE")
+		log.Info("[UE] Changed UE State to PDU SESSION ACTIVE")
+		
+		// get UE ip
+		UeIp := payloadContainer.PDUSessionEstablishmentAccept.GetPDUAddressInformation()
+		ue.SetIp(UeIp)
+	}
+	if payloadContainer.GsmHeader.GetMessageType() == nas.MsgTypePDUSessionReleaseCommand {
+		log.Info("[UE][NAS] Received NAS PDU Session Release Command")
+
+		// change the state of ue(SM)(PDU Session InActive).
+		ue.SetStateSM_PDU_SESSION_INACTIVE()
+		log.Info("[UE] Changed UE State to PDU SESSION INACTIVE")
+
+		trigger.SendPduSessionReleaseComplete(ue, gnb)
 		
 		// get UE ip
 		UeIp := payloadContainer.PDUSessionEstablishmentAccept.GetPDUAddressInformation()

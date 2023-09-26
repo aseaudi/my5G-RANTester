@@ -604,7 +604,7 @@ func HandlerPduSessionResourceReleaseCommand(gnb *context.GNBContext, message *n
 	var fiveQi int64
 	var priArp int64
 
-	valueMessage := message.InitiatingMessage.Value.PDUSessionResourceSetupRequest
+	valueMessage := message.InitiatingMessage.Value.PDUSessionResourceReleaseResponse
 
 	for _, ies := range valueMessage.ProtocolIEs.List {
 
@@ -631,7 +631,7 @@ func HandlerPduSessionResourceReleaseCommand(gnb *context.GNBContext, message *n
 			if ies.Value.PDUSessionResourceToReleaseListRelCmd == nil {
 				log.Fatal("[GNB][NGAP] PDU SESSION RESOURCE RELEASE LIST CMD is missing")
 			}
-			pDUSessionResourceToRelCmdLlist := ies.Value.PDUSessionResourceToReleaseItemRelCmd
+			pDUSessionResourceToRelCmdLlist := ies.Value.PDUSessionResourceToReleaseListRelCmd
 
 			for _, item := range pDUSessionResourceToRelCmdLlist.List {
 

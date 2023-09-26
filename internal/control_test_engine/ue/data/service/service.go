@@ -26,9 +26,9 @@ func InitDataPlane(ue *context.UEContext, message []byte) {
 		Local:  ueGnbIp,
 		Remote: gatewayIp,
 	}
-
+	netlink.LinkDel(newInterface)
 	if err := netlink.LinkAdd(newInterface); err != nil {
-		log.Info("UE][DATA] Error in setting virtual interface", err)
+		log.Info("[UE][DATA] Error in setting virtual interface", err)
 		return
 	}
 

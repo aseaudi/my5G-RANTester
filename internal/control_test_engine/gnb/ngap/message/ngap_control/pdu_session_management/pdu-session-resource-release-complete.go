@@ -17,7 +17,7 @@ func PDUSessionResourceReleaseComplete(ue *context.GNBUe, ipv4 string) ([]byte, 
 	if err != nil {
 		return nil, err
 	}
-	message := buildPDUSessionResourceSetupResponseForRegistrationTest(ue.GetAmfUeId(), ue.GetRanUeId(),
+	message := buildPDUSessionResourceReleaseResponseForRegistrationTest(ue.GetAmfUeId(), ue.GetRanUeId(),
 		nameIp[0], ue.GetPduSessionId(), ue.GetTeidDownlink(), ue.GetQosId())
 	return ngap.Encoder(message)
 }

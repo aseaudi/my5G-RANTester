@@ -69,7 +69,7 @@ func SendPduSessionResourceReleaseComplete(ue *context.GNBUe, gnb *context.GNBCo
 
 	// send PDU Session Resource Release complete.
 	gnbIp := gnb.GetGnbIpByData()
-	ngapMsg, err := pdu_session_management.PDUSessionResourceReleaseResponse(ue, gnbIp)
+	ngapMsg, err := pdu_session_management.PDUSessionResourceReleaseComplete(ue, gnbIp)
 	if err != nil {
 		log.Fatal("[GNB][NGAP] Error sending PDU Session Resource Setup Response.")
 	}

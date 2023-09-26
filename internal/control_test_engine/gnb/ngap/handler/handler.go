@@ -661,7 +661,7 @@ func HandlerPduSessionResourceReleaseCommand(gnb *context.GNBContext, message *n
 	sender.SendToUe(ue, messageNas)
 
 	// send PDU Session Resource Setup Response.
-	trigger.SendPduSessionReleaseComplete(ue, gnb)
+	trigger.SendPduSessionResourceReleaseComplete(ue, gnb)
 
 	time.Sleep(20 * time.Millisecond)
 

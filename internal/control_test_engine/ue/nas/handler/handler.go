@@ -178,9 +178,6 @@ func HandlerDlNasTransportPduaccept(ue *context.UEContext, message *nas.Message)
 
 		trigger.SendPduSessionReleaseComplete(ue)
 		
-		// get UE ip
-		UeIp := payloadContainer.PDUSessionEstablishmentAccept.GetPDUAddressInformation()
-		ue.SetIp(UeIp)
 	}
 }
 

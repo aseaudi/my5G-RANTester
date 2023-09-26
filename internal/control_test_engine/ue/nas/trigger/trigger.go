@@ -56,7 +56,7 @@ func PDUSessionRelease(ue *context.UEContext) {
 	ue.SetStateMM_DEREGISTERED()
 }
 
-func PduSessionReleaseComplete(ue *context.UEContext) {
+func SendPduSessionReleaseComplete(ue *context.UEContext) {
 
 	// deregistration procedure started.
 	pduSessionReleaseComplete, err := mm_5gs.UlNasTransport3(ue, nasMessage.ULNASTransportRequestTypeExistingPduSession)

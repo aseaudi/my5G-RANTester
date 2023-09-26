@@ -153,7 +153,7 @@ func HandlerRegistrationAccept(ue *context.UEContext, message *nas.Message) {
 }
 
 func HandlerDlNasTransportPduaccept(ue *context.UEContext, message *nas.Message) {
-
+	log.Info("[UE][NAS] Inside HandlerDlNasTransportPduaccept")
 	//getting PDU Session establishment accept.
 	payloadContainer := nas_control.GetNasPduFromPduAccept(message)
 	if payloadContainer.GsmHeader.GetMessageType() == nas.MsgTypePDUSessionEstablishmentAccept {
@@ -176,7 +176,7 @@ func HandlerDlNasTransportPduaccept(ue *context.UEContext, message *nas.Message)
 		ue.SetStateSM_PDU_SESSION_INACTIVE()
 		log.Info("[UE] Changed UE State to PDU SESSION INACTIVE")
 
-		trigger.PduSessionReleaseComplete(ue)
+		trigger.SendPduSessionReleaseComplete(ue)
 		
 		// get UE ip
 		UeIp := payloadContainer.PDUSessionEstablishmentAccept.GetPDUAddressInformation()

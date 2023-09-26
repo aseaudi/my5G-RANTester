@@ -56,10 +56,10 @@ func PDUSessionRelease(ue *context.UEContext) {
 	ue.SetStateMM_DEREGISTERED()
 }
 
-func PDUSessionReleaseComplete(ue *context.UEContext) {
+func PduSessionReleaseComplete(ue *context.UEContext) {
 
 	// deregistration procedure started.
-	pduSessionReleaseComplete, err := mm_5gs.UlNasTransport2(ue, nasMessage.ULNASTransportRequestTypeExistingPduSession)
+	pduSessionReleaseComplete, err := mm_5gs.UlNasTransport3(ue, nasMessage.ULNASTransportRequestTypeExistingPduSession)
     if err != nil {
 		log.Fatal("Error ")
 	}

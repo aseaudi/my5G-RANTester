@@ -176,7 +176,7 @@ func HandlerDlNasTransportPduaccept(ue *context.UEContext, message *nas.Message)
 		ue.SetStateSM_PDU_SESSION_INACTIVE()
 		log.Info("[UE] Changed UE State to PDU SESSION INACTIVE")
 
-		trigger.SendPduSessionReleaseComplete(ue, gnb)
+		trigger.PduSessionReleaseComplete(ue)
 		
 		// get UE ip
 		UeIp := payloadContainer.PDUSessionEstablishmentAccept.GetPDUAddressInformation()

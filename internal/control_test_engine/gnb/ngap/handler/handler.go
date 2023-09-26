@@ -604,7 +604,7 @@ func HandlerPduSessionResourceReleaseCommand(gnb *context.GNBContext, message *n
 	var fiveQi int64
 	var priArp int64
 
-	valueMessage := message.InitiatingMessage.Value.PDUSessionResourceReleaseResponse
+	valueMessage := message.InitiatingMessage.Value.PDUSessionResourceReleaseCommand
 
 	for _, ies := range valueMessage.ProtocolIEs.List {
 

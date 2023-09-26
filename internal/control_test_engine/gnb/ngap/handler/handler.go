@@ -594,15 +594,15 @@ func HandlerPduSessionResourceReleaseCommand(gnb *context.GNBContext, message *n
 	var ranUeId int64
 	var amfUeId int64
 	var pduSessionId int64
-	var ulTeid uint32
-	var upfAddress []byte
+	// var ulTeid uint32
+	// var upfAddress []byte
 	var messageNas []byte
-	var sst string
-	var sd string
-	var pduSType uint64
-	var qosId int64
-	var fiveQi int64
-	var priArp int64
+	// var sst string
+	// var sd string
+	// var pduSType uint64
+	// var qosId int64
+	// var fiveQi int64
+	// var priArp int64
 
 	valueMessage := message.InitiatingMessage.Value.PDUSessionResourceReleaseCommand
 

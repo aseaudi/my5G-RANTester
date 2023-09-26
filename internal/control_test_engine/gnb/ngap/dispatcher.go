@@ -49,7 +49,7 @@ func Dispatch(amf *context.GNBAmf, gnb *context.GNBContext, message []byte) {
 		case ngapType.ProcedureCodePDUSessionResourceRelease:
 			// handler NGAP PDU Session Resource Release Command.
 			log.Info("[GNB][NGAP] Receive PDU Session Resource Release Command")
-			handler.HandlerPduSessionResourceSetupRequest(gnb, ngapMsg)
+			handler.HandlerPduSessionResourceReleaseCommand(gnb, ngapMsg)
 		}
 		
 

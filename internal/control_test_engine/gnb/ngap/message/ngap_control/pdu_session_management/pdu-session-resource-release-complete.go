@@ -22,7 +22,7 @@ func PDUSessionResourceReleaseComplete(ue *context.GNBUe, ipv4 string) ([]byte, 
 	return ngap.Encoder(message)
 }
 
-func buildPDUSessionResourceSetupResponseForRegistrationTest(amfUeNgapID, ranUeNgapID int64, ipv4 string, pduId int64, teid uint32, qosId int64) (pdu ngapType.NGAPPDU) {
+func buildPDUSessionResourceReleaseResponseForRegistrationTest(amfUeNgapID, ranUeNgapID int64, ipv4 string, pduId int64, teid uint32, qosId int64) (pdu ngapType.NGAPPDU) {
 
 	pdu.Present = ngapType.NGAPPDUPresentSuccessfulOutcome
 	pdu.SuccessfulOutcome = new(ngapType.SuccessfulOutcome)

@@ -161,7 +161,8 @@ func HandlerDlNasTransportPduaccept(ue *context.UEContext, message *nas.Message)
 
 		// change the state of ue(SM)(PDU Session Active).
 		ue.SetStateSM_PDU_SESSION_ACTIVE()
-
+		log.Info("[UE] Changed UE State to PDU SESSION aCTIVE")
+		
 		// get UE ip
 		UeIp := payloadContainer.PDUSessionEstablishmentAccept.GetPDUAddressInformation()
 		ue.SetIp(UeIp)

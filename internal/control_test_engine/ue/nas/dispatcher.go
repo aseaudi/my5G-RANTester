@@ -87,6 +87,7 @@ func DispatchNas(ue *context.UEContext, message []byte) {
 			return
 		} else {
 			log.Info("[UE][NAS] successful NAS MAC verification")
+			log.Info("[UE][NAS] MAC = ", macReceived)
 		}
 
 		// check ciphering.

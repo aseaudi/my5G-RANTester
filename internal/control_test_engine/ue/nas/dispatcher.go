@@ -7,7 +7,7 @@ import (
 	"my5G-RANTester/lib/nas/security"
 	"reflect"
 	"time"
-
+	"encoding/hex"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -88,6 +88,7 @@ func DispatchNas(ue *context.UEContext, message []byte) {
 		} else {
 			log.Info("[UE][NAS] successful NAS MAC verification")
 			log.Info("[UE][NAS] MAC = ", macReceived)
+			log.Info("[UE][NAS] MAC = ", hex.EncodeToString(macReceived))
 		}
 
 		// check ciphering.

@@ -214,5 +214,6 @@ func HandlerContextReleaseIdle(ue *context.UEContext) {
 
 	// change the state of ue(SM)(PDU Session InActive).
 	ue.SetStateSM_PDU_SESSION_INACTIVE()
+	log.Info("[UE][NAS] Set UE state to PDU SESSION INACTIVE")
 
 }

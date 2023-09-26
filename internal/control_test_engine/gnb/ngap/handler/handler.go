@@ -588,3 +588,82 @@ func HandlerNgSetupFailure(amf *context.GNBAmf, gnb *context.GNBContext, message
 
 	log.Info("[GNB][NGAP] AMF is inactive")
 }
+
+func HandlerPduSessionResourceReleaseCommand(gnb *context.GNBContext, message *ngapType.NGAPPDU) {
+
+	var ranUeId int64
+	var amfUeId int64
+	var pduSessionId int64
+	var ulTeid uint32
+	var upfAddress []byte
+	var messageNas []byte
+	var sst string
+	var sd string
+	var pduSType uint64
+	var qosId int64
+	var fiveQi int64
+	var priArp int64
+
+	valueMessage := message.InitiatingMessage.Value.PDUSessionResourceSetupRequest
+
+	for _, ies := range valueMessage.ProtocolIEs.List {
+
+		// TODO MORE FIELDS TO CHECK HERE
+		switch ies.Id.Value {
+
+		case ngapType.ProtocolIEIDAMFUENGAPID:
+
+			if ies.Value.AMFUENGAPID == nil {
+				log.Fatal("[GNB][NGAP] AMF UE ID is missing")
+			}
+			amfUeId = ies.Value.AMFUENGAPID.Value
+
+		case ngapType.ProtocolIEIDRANUENGAPID:
+
+			if ies.Value.RANUENGAPID == nil {
+				log.Fatal("[GNB][NGAP] RAN UE ID is missing")
+				// TODO SEND ERROR INDICATION
+			}
+			ranUeId = ies.Value.RANUENGAPID.Value
+
+		case ngapType.ProtocolIEIDPDUSessionResourceToReleaseListRelCmd:
+
+			if ies.Value.PDUSessionResourceToReleaseListRelCmd == nil {
+				log.Fatal("[GNB][NGAP] PDU SESSION RESOURCE RELEASE LIST CMD is missing")
+			}
+			pDUSessionResourceToRelCmdLlist := ies.Value.PDUSessionResourceToReleaseItemRelCmd
+
+			for _, item := range pDUSessionResourceToRelCmdLlist.List {
+
+				// check PDU Session 
+
+				pduSessionId = item.PDUSessionID.Value
+				log.Info("[GNB][NGAP] PDU Session ID = ", pduSessionId)
+
+			}
+		}
+	}
+
+	// check RanUeId and get UE.
+	ue, err := gnb.GetGnbUe(ranUeId)
+	if err != nil || ue == nil {
+		log.Fatal("[GNB][NGAP] Error in Pdu Session Resource Setup Request. UE was not found in GNB POOL")
+		// TODO SEND ERROR INDICATION
+	}
+
+	// check if AMF UE id.
+	if ue.GetAmfUeId() != amfUeId {
+		log.Fatal("[GNB][NGAP] Error in Pdu Session Resource Setup Request. Problem in AMF UE ID from CORE")
+		// TODO SEND ERROR INDICATION
+	}
+
+	// send NAS message to UE.
+	sender.SendToUe(ue, messageNas)
+
+	// send PDU Session Resource Setup Response.
+	trigger.SendPduSessionReleaseComplete(ue, gnb)
+
+	time.Sleep(20 * time.Millisecond)
+
+	
+}

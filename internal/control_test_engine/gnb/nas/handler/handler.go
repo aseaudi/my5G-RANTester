@@ -48,6 +48,8 @@ func HandlerUeReady(ue *context.GNBUe, message []byte, gnb *context.GNBContext) 
 	// receive UE ip or other messages.
 
 	ngap, err := nas_transport.SendUplinkNasTransport(message, ue, gnb)
+	
+
 	if err != nil {
 		log.Info("[GNB][NGAP] Error making Uplink Nas Transport: ", err)
 	}
@@ -57,5 +59,7 @@ func HandlerUeReady(ue *context.GNBUe, message []byte, gnb *context.GNBContext) 
 	err = sender.SendToAmF(ngap, conn)
 	if err != nil {
 		log.Info("[GNB][AMF] Error sending Uplink Nas Transport: ", err)
+	} else {
+	log.Info("[GNB][NAS] Sent UL NAS Transport to AMF")
 	}
 }

@@ -47,7 +47,7 @@ func PDUSessionRelease(ue *context.UEContext) {
 	// deregistration procedure started.
 	pduSessionReleaseRequest, err := mm_5gs.UlNasTransport2(ue, nasMessage.ULNASTransportRequestTypeExistingPduSession)
     if err != nil {
-		return nil, log.Fatal("Error ")
+		log.Fatal("Error ")
 	}
 	// send to GNB.
 	sender.SendToGnb(ue, pduSessionReleaseRequest)

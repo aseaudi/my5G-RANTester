@@ -124,10 +124,13 @@ func HandlerRegistrationAccept(ue *context.UEContext, message *nas.Message) {
 	if err != nil {
 		log.Fatal("[UE][NAS] Error sending Registration Complete: ", err)
 	}
-
+	
 	// sending to GNB
 	sender.SendToGnb(ue, registrationComplete)
-
+	
+	log.Info("[UE][NAS] Sent Register Complete to GNB")
+	log.Info("[UE][NAS] Wait for Configuration Update Command")
+	
 	// waiting receive Configuration Update Command.
 	time.Sleep(20 * time.Millisecond)
 
@@ -140,8 +143,11 @@ func HandlerRegistrationAccept(ue *context.UEContext, message *nas.Message) {
 	// change the sate of ue(SM).
 	ue.SetStateSM_PDU_SESSION_PENDING()
 
+	log.Info("[UE] Changed UE State to PDU SESSION PENDING")
 	// sending to GNB
 	sender.SendToGnb(ue, ulNasTransport)
+	log.Info("[UE][NAS] Sent UL NAS Transport with PDU Session Establishment Request to GNB")
+
 }
 
 func HandlerDlNasTransportPduaccept(ue *context.UEContext, message *nas.Message) {

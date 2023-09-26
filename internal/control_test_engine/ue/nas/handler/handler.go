@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"my5G-RANTester/internal/control_test_engine/gnb/ngap/trigger/trigger.go"
+	"my5G-RANTester/internal/control_test_engine/ue/trigger/trigger.go"
 	"fmt"
 	"my5G-RANTester/internal/control_test_engine/ue/context"
 	"my5G-RANTester/internal/control_test_engine/ue/nas/message/nas_control"

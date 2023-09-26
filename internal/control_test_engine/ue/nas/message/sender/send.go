@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"my5G-RANTester/internal/control_test_engine/ue/context"
 	"encoding/hex"
+	log "github.com/sirupsen/logrus"
 )
 
 func SendToGnb(ue *context.UEContext, message []byte) {

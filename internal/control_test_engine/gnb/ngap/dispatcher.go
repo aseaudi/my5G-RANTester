@@ -51,7 +51,7 @@ func Dispatch(amf *context.GNBAmf, gnb *context.GNBContext, message []byte) {
 			log.Info("[GNB][NGAP] Receive PDU Session Resource Release Command")
 			handler.HandlerPduSessionResourceSetupRequest(gnb, ngapMsg)
 		}
-		ProcedureCodePDUSessionResourceRelease
+		
 
 
 	case ngapType.NGAPPDUPresentSuccessfulOutcome:

@@ -132,7 +132,7 @@ func HandlerRegistrationAccept(ue *context.UEContext, message *nas.Message) {
 	log.Info("[UE][NAS] Wait for Configuration Update Command")
 	
 	// waiting receive Configuration Update Command.
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(2000 * time.Millisecond)
 
 	// getting ul nas transport and pduSession establishment request.
 	ulNasTransport, err := mm_5gs.UlNasTransport(ue, nasMessage.ULNASTransportRequestTypeInitialRequest)

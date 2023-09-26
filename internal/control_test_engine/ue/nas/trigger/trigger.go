@@ -5,6 +5,7 @@ import (
 	"my5G-RANTester/internal/control_test_engine/ue/nas/message/nas_control/mm_5gs"
 	"my5G-RANTester/internal/control_test_engine/ue/nas/message/sender"
 	"my5G-RANTester/lib/nas/nasMessage"
+	log "github.com/sirupsen/logrus"
 )
 
 func InitRegistration(ue *context.UEContext) {
@@ -45,7 +46,9 @@ func PDUSessionRelease(ue *context.UEContext) {
 
 	// deregistration procedure started.
 	pduSessionReleaseRequest, err := mm_5gs.UlNasTransport2(ue, nasMessage.ULNASTransportRequestTypeExistingPduSession)
-
+    if err != nil {
+		return nil, log.Fatal("Error ")
+	}
 	// send to GNB.
 	sender.SendToGnb(ue, pduSessionReleaseRequest)
 

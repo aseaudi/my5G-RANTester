@@ -163,8 +163,8 @@ func DispatchNas(ue *context.UEContext, message []byte) {
 		handler.HandlerDlNasTransportPduaccept(ue, m)
 		// sleep 30 seconds and send context release idle
 		
-			log.Info("[UE][NAS] Handled PDU Session Establishment accept, waiting 30 seconds to Pdu release idle")
-			time.Sleep(30 * time.Second)
+			log.Info("[UE][NAS] Handled PDU Session Establishment accept, waiting 15 seconds to Pdu release idle")
+			time.Sleep(15 * time.Second)
 			
 			trigger.PDUSessionRelease(ue)
 			log.Info("[UE][NAS] Sent PDU Session Release Request to GNB idle") 

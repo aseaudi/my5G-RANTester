@@ -34,7 +34,7 @@ func BuildUEContextReleaseComplete(amfUeNgapID, ranUeNgapID int64) (pdu ngapType
 	pdu.SuccessfulOutcome = new(ngapType.SuccessfulOutcome)
 
 	successfulOutcome := pdu.SuccessfulOutcome
-	successfulOutcome.ProcedureCode.Value = ngapType.ProcedureCodeInitialContextSetup
+	successfulOutcome.ProcedureCode.Value = ngapType.ProcedureCodeUEContextRelease
 	successfulOutcome.Criticality.Value = ngapType.CriticalityPresentReject
 
 	successfulOutcome.Value.Present = ngapType.SuccessfulOutcomePresentUEContextReleaseComplete

@@ -735,7 +735,6 @@ func HandlerUEContextReleaseCommand(gnb *context.GNBContext, message *ngapType.N
 	
 	time.Sleep(20 * time.Millisecond)
 
-	// send event to terminate ue
-	ue.ch <- 1
+
 	
 }

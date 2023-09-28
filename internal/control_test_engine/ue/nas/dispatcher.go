@@ -161,15 +161,24 @@ func DispatchNas(ue *context.UEContext, message []byte) {
 		log.Info("[UE][NAS] Receive DL NAS Transport")
 		//if m.g.GsmHeader.GetMessageType() == nas.MsgTypePDUSessionEstablishmentAccept {
 		handler.HandlerDlNasTransportPduaccept(ue, m)
-		// sleep 10 seconds and send context release idle
+		// // sleep 10 seconds and send context release idle
 		
-			log.Info("[UE][NAS] Handled PDU Session Establishment accept, waiting 10 seconds to Pdu release idle")
-			time.Sleep(10 * time.Second)
+		// 	log.Info("[UE][NAS] Handled PDU Session Establishment accept, waiting 10 seconds to Pdu release idle")
+		// 	time.Sleep(10 * time.Second)
 			
-			//trigger.PDUSessionRelease(ue)
-			//log.Info("[UE][NAS] Sent PDU Session Release Request to GNB idle") 
-			trigger.DeRegister(ue)
-			log.Info("[UE][NAS] Sent Deregister request to GNB")
+		// 	log.Info("[UE][NAS] Sending event to terminate UE")
+		// 	time.Sleep(100 * time.Millisecond)
+		// 	ue.ch <- 1
+		// 	//trigger.PDUSessionRelease(ue)
+		// 	//log.Info("[UE][NAS] Sent PDU Session Release Request to GNB idle") 
+		// 	trigger.DeRegister(ue)
+		// 	log.Info("[UE][NAS] Sent Deregister request to GNB")
+
+		// 	// send event to terminate ue
+		// 	log.Info("[UE][NAS] Sending event to terminate UE")
+		// 	time.Sleep(100 * time.Millisecond)
+		// 	ue.ch <- 1
+			
 	//}
 
 

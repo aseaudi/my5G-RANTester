@@ -68,6 +68,10 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 
 	// wg := sync.WaitGroup{}
 
+
+	// new channel
+	ch := make(chan string)
+
 	// new UE instance.
 	ue := &context.UEContext{}
 
@@ -86,7 +90,8 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 		conf.Ue.Dnn,
 		int32(conf.Ue.Snssai.Sst),
 		conf.Ue.Snssai.Sd,
-		id)
+		id,
+		ch)
 
 	// starting communication with GNB and listen.
 	ue_connect := 0
@@ -117,7 +122,14 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 	signal.Notify(sigUe, os.Interrupt)
 
 	// Block until a signal is received.
-	<-sigUe
+	// <-sigUe
+
+	select {
+	case <-sigUe:
+		log.Info("[UE] OS Signal Interrupt, UE will now terminate")
+	case <-ch:
+		log.Info("[UE] UE Signal received, UE will now terminate")
+	}
 	ue.Terminate()
 	wg.Done()
 	// os.Exit(0)

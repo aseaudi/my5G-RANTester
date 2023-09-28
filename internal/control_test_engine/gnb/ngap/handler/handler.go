@@ -732,6 +732,10 @@ func HandlerUEContextReleaseCommand(gnb *context.GNBContext, message *ngapType.N
 
 	// send PDU Session Resource Setup Response.
 	trigger.SendUEContextReleaseComplete(ue, gnb)
-
+	
 	time.Sleep(20 * time.Millisecond)
+
+	// send event to terminate ue
+	ue.ch <- 1
+	
 }

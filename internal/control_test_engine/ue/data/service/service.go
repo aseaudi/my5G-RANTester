@@ -90,6 +90,6 @@ func InitDataPlane(ue *context.UEContext, message []byte) {
 	ue.SetTunRule(ueRule)
 
 	log.Info("[UE][Data] Sending event to UE to trigger deregister")
-	ue.ch <- 1
+	ue.Ch <- 1
 
 }

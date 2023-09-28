@@ -21,6 +21,9 @@ func RegistrationUe(conf config.Config, id uint8, wg *sync.WaitGroup) {
 	// new UE instance.
 	ue := &context.UEContext{}
 
+	// add channel to ue
+	ch := make(chan string)
+
 	// new UE context
 	ue.NewRanUeContext(
 		conf.Ue.Msin,
@@ -36,7 +39,8 @@ func RegistrationUe(conf config.Config, id uint8, wg *sync.WaitGroup) {
 		conf.Ue.Dnn,
 		int32(conf.Ue.Snssai.Sst),
 		conf.Ue.Snssai.Sd,
-		id)
+		id,
+		ch)
 
 	// starting communication with GNB and listen.
 	err := service.InitConn(ue)

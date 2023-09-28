@@ -38,7 +38,7 @@ type UEContext struct {
 	UnixConn   net.Conn
 	PduSession PDUSession
 	amfInfo    Amf
-	ch	   chan string
+	Ch	   chan string
 }
 
 type Amf struct {
@@ -146,7 +146,7 @@ func (ue *UEContext) NewRanUeContext(msin string,
 	ue.SetStateSM_PDU_SESSION_INACTIVE()
 
 	// add channel for events
-	ue.ch = ch
+	ue.Ch = ch
 
 }
 

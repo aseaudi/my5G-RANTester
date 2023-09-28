@@ -148,7 +148,7 @@ func RegistrationUeMonitor(conf config.Config,
 
 	// new UE instance.
 	ue := &context.UEContext{}
-
+		ch:=make(chan string)
 	// new UE context
 	ue.NewRanUeContext(
 		conf.Ue.Msin,
@@ -164,7 +164,8 @@ func RegistrationUeMonitor(conf config.Config,
 		conf.Ue.Dnn,
 		int32(conf.Ue.Snssai.Sst),
 		conf.Ue.Snssai.Sd,
-		id)
+		id,
+		ch)
 
 	// starting communication with GNB and listen.
 	err := service.InitConn(ue)

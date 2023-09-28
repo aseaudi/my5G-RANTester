@@ -684,7 +684,7 @@ func HandlerUEContextReleaseCommand(gnb *context.GNBContext, message *ngapType.N
 	// var fiveQi int64
 	// var priArp int64
 
-	valueMessage := message.InitiatingMessage.Value.UEContextReleaseCommandIEsValue
+	valueMessage := message.InitiatingMessage.Value.UEContextReleaseCommand
 
 	for _, ies := range valueMessage.ProtocolIEs.List {
 

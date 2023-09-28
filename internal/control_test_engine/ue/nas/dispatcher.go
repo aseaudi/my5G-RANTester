@@ -7,7 +7,7 @@ import (
 	"my5G-RANTester/lib/nas"
 	"my5G-RANTester/lib/nas/security"
 	"reflect"
-	"time"
+	//"time"
 	"encoding/hex"
 	log "github.com/sirupsen/logrus"
 )

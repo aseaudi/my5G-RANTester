@@ -691,7 +691,7 @@ func HandlerUEContextReleaseCommand(gnb *context.GNBContext, message *ngapType.N
 		// TODO MORE FIELDS TO CHECK HERE
 		switch ies.Id.Value {
 
-		case ngapType.UENGAPIDs:
+		case ngapType.ProtocolIEIDUENGAPIDs:
 
 			if ies.Value.UENGAPIDs.UENGAPIDPair.AMFUENGAPID == nil {
 				log.Fatal("[GNB][NGAP] AMF UE ID is missing")

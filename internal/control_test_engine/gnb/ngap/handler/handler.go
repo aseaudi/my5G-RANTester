@@ -693,15 +693,15 @@ func HandlerUEContextReleaseCommand(gnb *context.GNBContext, message *ngapType.N
 
 		case ngapType.ProtocolIEIDUENGAPIDs:
 
-			if ies.Value.UENGAPIDs.UENGAPIDPair.AMFUENGAPID.Value == nil {
-				log.Fatal("[GNB][NGAP] AMF UE ID is missing")
-			}
+			// if ies.Value.UENGAPIDs.UENGAPIDPair.AMFUENGAPID.Value == nil {
+			// 	log.Fatal("[GNB][NGAP] AMF UE ID is missing")
+			// }
 			amfUeId = ies.Value.UENGAPIDs.UENGAPIDPair.AMFUENGAPID.Value
 
-			if ies.Value.UENGAPIDs.UENGAPIDPair.RANUENGAPID.Value == nil {
-				log.Fatal("[GNB][NGAP] RAN UE ID is missing")
-				// TODO SEND ERROR INDICATION
-			}
+			// if ies.Value.UENGAPIDs.UENGAPIDPair.RANUENGAPID.Value == nil {
+			// 	log.Fatal("[GNB][NGAP] RAN UE ID is missing")
+			// 	// TODO SEND ERROR INDICATION
+			// }
 			ranUeId = ies.Value.UENGAPIDs.UENGAPIDPair.RANUENGAPID.Value
 
 		}

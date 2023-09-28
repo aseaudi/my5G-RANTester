@@ -101,4 +101,5 @@ func SendUEContextReleaseComplete(ue *context.GNBUe, gnb *context.GNBContext) {
 	if err != nil {
 		log.Fatal("[GNB][AMF] Error sending UE Context Release Complete : ", err)
 	}
+	log.Info("[GNB][AMF] Sent UE Context Release Complete to AMF")
 }

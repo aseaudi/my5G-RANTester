@@ -691,20 +691,18 @@ func HandlerUEContextReleaseCommand(gnb *context.GNBContext, message *ngapType.N
 		// TODO MORE FIELDS TO CHECK HERE
 		switch ies.Id.Value {
 
-		case ngapType.ProtocolIEIDAMFUENGAPID:
+		case ngapType.UENGAPIDs:
 
-			if ies.Value.AMFUENGAPID == nil {
+			if ies.Value.UENGAPIDs.UENGAPIDPair.AMFUENGAPID == nil {
 				log.Fatal("[GNB][NGAP] AMF UE ID is missing")
 			}
-			amfUeId = ies.Value.AMFUENGAPID.Value
+			amfUeId = ies.Value.UENGAPIDs.UENGAPIDPair.AMFUENGAPID.Value
 
-		case ngapType.ProtocolIEIDRANUENGAPID:
-
-			if ies.Value.RANUENGAPID == nil {
+			if ies.Value.UENGAPIDs.UENGAPIDPair.RANUENGAPID == nil {
 				log.Fatal("[GNB][NGAP] RAN UE ID is missing")
 				// TODO SEND ERROR INDICATION
 			}
-			ranUeId = ies.Value.RANUENGAPID.Value
+			ranUeId = ies.Value.UENGAPIDs.UENGAPIDPair.RANUENGAPID.Value
 
 		}
 	}
@@ -722,15 +720,15 @@ func HandlerUEContextReleaseCommand(gnb *context.GNBContext, message *ngapType.N
 		// TODO SEND ERROR INDICATION
 	}
 
-	// check PDU Session NAS PDU.
-	if message.PDUSessionNASPDU != nil {
-		messageNas = message.PDUSessionNASPDU.Value
-	} else {
-		log.Fatal("[GNB][NGAP] NAS PDU is missing")
-	}
+	// // check PDU Session NAS PDU.
+	// if message.PDUSessionNASPDU != nil {
+	// 	messageNas = message.PDUSessionNASPDU.Value
+	// } else {
+	// 	log.Fatal("[GNB][NGAP] NAS PDU is missing")
+	// }
 
-	// send NAS message to UE.
-	sender.SendToUe(ue, messageNas)
+	// // send NAS message to UE.
+	// sender.SendToUe(ue, messageNas)
 
 	// send PDU Session Resource Setup Response.
 	trigger.SendUEContextReleaseComplete(ue, gnb)

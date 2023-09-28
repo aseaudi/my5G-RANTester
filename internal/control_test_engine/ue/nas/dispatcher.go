@@ -3,7 +3,7 @@ package nas
 import (
 	"my5G-RANTester/internal/control_test_engine/ue/context"
 	"my5G-RANTester/internal/control_test_engine/ue/nas/handler"
-	"my5G-RANTester/internal/control_test_engine/ue/nas/trigger"
+	//"my5G-RANTester/internal/control_test_engine/ue/nas/trigger"
 	"my5G-RANTester/lib/nas"
 	"my5G-RANTester/lib/nas/security"
 	"reflect"

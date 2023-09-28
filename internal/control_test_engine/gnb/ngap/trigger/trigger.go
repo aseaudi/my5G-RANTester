@@ -88,7 +88,7 @@ func SendUEContextReleaseComplete(ue *context.GNBUe, gnb *context.GNBContext) {
 
 	// send PDU Session Resource Release complete.
 	gnbIp := gnb.GetGnbIpByData()
-	ngapMsg, err := ue_context_management.UEContextReleaseComplete(ue, gnbIp)
+	ngapMsg, err := ue_context_management.UEContextReleaseComplete(ue)
 	if err != nil {
 		log.Fatal("[GNB][NGAP] Error building UE Context Release Complete.")
 	}

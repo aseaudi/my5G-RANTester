@@ -673,10 +673,10 @@ func HandlerUEContextReleaseCommand(gnb *context.GNBContext, message *ngapType.N
 
 	var ranUeId int64
 	var amfUeId int64
-	var pduSessionId int64
+	//var pduSessionId int64
 	// var ulTeid uint32
 	// var upfAddress []byte
-	var messageNas []byte
+	//var messageNas []byte
 	// var sst string
 	// var sd string
 	// var pduSType uint64

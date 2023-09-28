@@ -23,12 +23,12 @@ func initialContextSetupResponse(connN2 *sctp.SCTPConn, amfUeNgapID int64, ranUe
 */
 
 func UEContextReleaseComplete(ue *context.GNBUe) ([]byte, error) {
-	message := BuildInitialContextSetupResponseForRegistraionTest(ue.GetAmfUeId(), ue.GetRanUeId())
+	message := BuildUEContextReleaseComplete(ue.GetAmfUeId(), ue.GetRanUeId())
 
 	return ngap.Encoder(message)
 }
 
-func BuildInitialContextSetupResponseForRegistraionTest(amfUeNgapID, ranUeNgapID int64) (pdu ngapType.NGAPPDU) {
+func BuildUEContextReleaseComplete(amfUeNgapID, ranUeNgapID int64) (pdu ngapType.NGAPPDU) {
 
 	pdu.Present = ngapType.NGAPPDUPresentSuccessfulOutcome
 	pdu.SuccessfulOutcome = new(ngapType.SuccessfulOutcome)

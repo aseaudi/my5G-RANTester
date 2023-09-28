@@ -83,3 +83,22 @@ func SendPduSessionResourceReleaseComplete(ue *context.GNBUe, gnb *context.GNBCo
 		log.Fatal("[GNB][AMF] Error sending PDU Session Resource Setup Response.: ", err)
 	}
 }
+
+func SendUEContextReleaseComplete(ue *context.GNBUe, gnb *context.GNBContext) {
+
+	// send PDU Session Resource Release complete.
+	gnbIp := gnb.GetGnbIpByData()
+	ngapMsg, err := pdu_session_management.PDUSessionResourceReleaseComplete(ue, gnbIp)
+	if err != nil {
+		log.Fatal("[GNB][NGAP] Error sending PDU Session Resource Setup Response.")
+	}
+
+	//ue.SetStateReady()
+
+	// Send PDU Session Resource Setup Response.
+	conn := ue.GetSCTP()
+	err = sender.SendToAmF(ngapMsg, conn)
+	if err != nil {
+		log.Fatal("[GNB][AMF] Error sending PDU Session Resource Setup Response.: ", err)
+	}
+}

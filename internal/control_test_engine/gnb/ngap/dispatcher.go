@@ -50,6 +50,11 @@ func Dispatch(amf *context.GNBAmf, gnb *context.GNBContext, message []byte) {
 			// handler NGAP PDU Session Resource Release Command.
 			log.Info("[GNB][NGAP] Receive PDU Session Resource Release Command")
 			handler.HandlerPduSessionResourceReleaseCommand(gnb, ngapMsg)
+	
+		case ngapType.ProcedureCodeUEContextRelease:
+			// handler NGAP UE Context Release Command.
+			log.Info("[GNB][NGAP] Receive UE Context Release Command")
+			handler.HandlerUEContextReleaseCommand(gnb, ngapMsg)
 		}
 		
 

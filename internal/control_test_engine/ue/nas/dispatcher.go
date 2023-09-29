@@ -13,7 +13,7 @@ import (
 )
 
 func DispatchNas(ue *context.UEContext, message []byte) {
-	log.Info("[UE][NAS] MSG = ", hex.EncodeToString(message))
+	log.Info("[UE][NAS] DL NAS MSG = ", hex.EncodeToString(message))
 
 	var cph bool
 

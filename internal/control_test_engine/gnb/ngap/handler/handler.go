@@ -493,7 +493,6 @@ func HandlerNgSetupResponse(amf *context.GNBAmf, gnb *context.GNBContext, messag
 			}
 		}
 
-		gnb.Ch <- "associated"
 	}
 
 	if err {
@@ -513,6 +512,7 @@ func HandlerNgSetupResponse(amf *context.GNBAmf, gnb *context.GNBContext, messag
 			log.Info("[GNB][AMF] List of AMF slices Supported by AMF -- sst:", sst, " sd:", sd)
 		}
 	}
+	gnb.Ch <- "associated"
 
 }
 

@@ -31,12 +31,12 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
     for j:= 1; j<=numGnbs; j++{
 		log.Info("[TESTER] INIT GNB ", j)
 		//time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
-		go gnb.InitGnb2(cfg, int(j), &wg)
-
+		ch := make(chan string)
+		go gnb.InitGnb2(cfg, int(j), &wg, ch)
 		wg.Add(1)
-
+		<-ch
 		
-		time.Sleep(time.Duration(1) * time.Second)
+		//time.Sleep(time.Duration(1) * time.Second)
 		msin :=  cfg.Ue.Msin
 		randNumUes := rand.Intn(numUes) + 1
 		log.Info("[TESTER] TESTING Random Number of UEs = ", randNumUes)

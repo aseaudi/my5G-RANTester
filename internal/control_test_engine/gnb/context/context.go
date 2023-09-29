@@ -23,6 +23,7 @@ type GNBContext struct {
 	idAmfGenerator int64  // ran amf id
 	teidGenerator  uint32 // ran UE downlink Teid
 	ueIpGenerator  uint8  // ran ue ip.
+	ch             chan string
 }
 
 type DataInfo struct {

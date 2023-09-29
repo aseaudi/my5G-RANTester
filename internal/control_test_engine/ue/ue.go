@@ -133,7 +133,7 @@ func RegistrationUe2(conf config.Config, id uint8, id2 int, wg *sync.WaitGroup) 
 		log.Info("[UE] OS Signal Interrupt, UE will now terminate")
 	case <-ch:
 		log.Info("[UE] UE Signal received, UE will now deregister and terminate")
-		time.Sleep(10 * time.Second)
+		time.Sleep(1 * time.Second)
 		trigger.DeRegister(ue)
 		time.Sleep(1 * time.Second)
 	}

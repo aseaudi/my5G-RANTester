@@ -23,7 +23,7 @@ type GNBContext struct {
 	idAmfGenerator int64  // ran amf id
 	teidGenerator  uint32 // ran UE downlink Teid
 	ueIpGenerator  uint8  // ran ue ip.
-	ch             chan string
+	Ch             chan string
 }
 
 type DataInfo struct {
@@ -52,7 +52,7 @@ type ControlInfo struct {
 	n2           *sctp.SCTPConn
 }
 
-func (gnb *GNBContext) NewRanGnbContext(gnbId, mcc, mnc, tac, sst, sd, ip, ipData string, port, portData int) {
+func (gnb *GNBContext) NewRanGnbContext(gnbId, mcc, mnc, tac, sst, sd, ip, ipData string, port, portData int, ch chan string) {
 	gnb.controlInfo.mcc = mcc
 	gnb.controlInfo.mnc = mnc
 	gnb.controlInfo.tac = tac
@@ -71,6 +71,7 @@ func (gnb *GNBContext) NewRanGnbContext(gnbId, mcc, mnc, tac, sst, sd, ip, ipDat
 	gnb.dataInfo.upfIp = ""
 	gnb.dataInfo.gnbIp = ipData
 	gnb.dataInfo.gnbPort = portData
+	gnb.Ch = ch
 }
 
 func (gnb *GNBContext) NewGnBUe(conn net.Conn) *GNBUe {

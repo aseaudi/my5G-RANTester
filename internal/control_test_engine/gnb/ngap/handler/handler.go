@@ -492,8 +492,8 @@ func HandlerNgSetupResponse(amf *context.GNBAmf, gnb *context.GNBContext, messag
 				}
 			}
 		}
-		
-		gnb.ch <- "associated"
+
+		gnb.Ch <- "associated"
 	}
 
 	if err {

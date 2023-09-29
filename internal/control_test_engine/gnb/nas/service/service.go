@@ -86,7 +86,9 @@ func gnbListen(gnb *context.GNBContext) {
 		ue := gnb.NewGnBUe(fd)
 		if ue == nil {
 			log.Info("[GNB][UE] Error in ue := gnb.NewGnBUe(fd)")
-			break
+			// instead of break, we should continue to accept more ue connections, maybe the gnb amf ng setup was a little slow and the next ue connection will eventually reach the amf
+			//break
+			continue
 		}
 
 		// accept and handle connection.

@@ -42,10 +42,10 @@ func InitServer2(gnb *context.GNBContext, id int) error {
 	os.Remove("/tmp/gnb" + strconv.Itoa(id) + ".sock")
 	ln, err := net.Listen("unix", "/tmp/gnb" + strconv.Itoa(id) + ".sock")
 	if err != nil {
-		fmt.Errorf("Listen error: ", err)
+		log.Info("[GNB] Listen error: ", err)
+	} else {
+		log.Info("[GNB] GNB unix socket /tmp/gnb" + strconv.Itoa(id) + ".sock")
 	}
-	log.Info("[GNB] GNB unix socket /tmp/gnb" + strconv.Itoa(id) + ".sock")
-
 	gnb.SetListener(ln)
 
 	/*
@@ -85,6 +85,7 @@ func gnbListen(gnb *context.GNBContext) {
 		// make a tun interface
 		ue := gnb.NewGnBUe(fd)
 		if ue == nil {
+			log.Info("[GNB][UE] Error in ue := gnb.NewGnBUe(fd)")
 			break
 		}
 

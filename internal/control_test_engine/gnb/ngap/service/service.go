@@ -67,15 +67,12 @@ func GnbListen(amf *context.GNBAmf, gnb *context.GNBContext) {
 
 		n, info, err := conn.SCTPRead(buf[:])
 		if err != nil {
-			sctp_connect := 0
-			for sctp_connect == 0 {
 			log.Info("[GNB][NGAP] Error reading SCTP : ", err)
 			log.Info("[GNB][NGAP] Reconnecting with AMF SCTP")
 			//break
 			// check AMF IP and AMF port.
 			remote := fmt.Sprintf("%s:%d", amf.GetAmfIp(), amf.GetAmfPort())
 			local := fmt.Sprintf("%s:%d", gnb.GetGnbIp(), gnb.GetGnbPort())
-
 			rem, err := sctp.ResolveSCTPAddr("sctp", remote)
 			if err != nil {
 				time.Sleep(1 * time.Second)
@@ -86,29 +83,28 @@ func GnbListen(amf *context.GNBAmf, gnb *context.GNBContext) {
 				time.Sleep(1 * time.Second)
 				continue
 			}
-			conn_new, err := sctp.DialSCTPExt(
-				"sctp",
-				loc,
-				rem,
-				sctp.InitMsg{NumOstreams: 2, MaxInstreams: 2})
-			if err != nil {
-				log.Info("[GNB][NGAP] Error reconnecting with AMF SCTP, retry again ...")
-				//amf.SetSCTPConn(nil)
-				time.Sleep(1 * time.Second)
-				continue
+			sctp_connect := 0
+			for sctp_connect == 0 {
+				conn_new, err := sctp.DialSCTPExt(
+					"sctp",
+					loc,
+					rem,
+					sctp.InitMsg{NumOstreams: 2, MaxInstreams: 2})
+				if err != nil {
+					log.Info("[GNB][NGAP] Error reconnecting with AMF SCTP: ", err)
+					log.Info("[GNB][NGAP] Retry reconnect with AMF SCTP again ...")
+					//amf.SetSCTPConn(nil)
+					time.Sleep(1 * time.Second)
+					continue
+				}
+				// set streams and other information about TNLA
+				// successful established SCTP (TNLA - N2)
+				amf.SetSCTPConn(conn_new)
+				gnb.SetN2(conn_new)
+				conn_new.SubscribeEvents(sctp.SCTP_EVENT_DATA_IO)
+				sctp_connect = 1
+				log.Info("[GNB][NGAP] Reconnected OK with AMF SCTP")
 			}
-		
-			// set streams and other information about TNLA
-		
-			// successful established SCTP (TNLA - N2)
-			amf.SetSCTPConn(conn_new)
-			gnb.SetN2(conn_new)
-		
-			conn_new.SubscribeEvents(sctp.SCTP_EVENT_DATA_IO)
-			sctp_connect = 1
-			log.Info("[GNB][NGAP] Reconnected OK with AMF SCTP")
-			
-		}
 		if sctp_connect == 1 {
 			continue
 		}

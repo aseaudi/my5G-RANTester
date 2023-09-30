@@ -680,68 +680,31 @@ func HandlerPduSessionResourceReleaseCommand(gnb *context.GNBContext, message *n
 func HandlerUEContextReleaseCommand(gnb *context.GNBContext, message *ngapType.NGAPPDU) {
 
 	var ranUeId int64
-	var amfUeId int64
-	//var pduSessionId int64
-	// var ulTeid uint32
-	// var upfAddress []byte
-	//var messageNas []byte
-	// var sst string
-	// var sd string
-	// var pduSType uint64
-	// var qosId int64
-	// var fiveQi int64
-	// var priArp int64
+	//var amfUeId int64
+
 
 	valueMessage := message.InitiatingMessage.Value.UEContextReleaseCommand
 
 	for _, ies := range valueMessage.ProtocolIEs.List {
 
-		// TODO MORE FIELDS TO CHECK HERE
 		switch ies.Id.Value {
-
 		case ngapType.ProtocolIEIDUENGAPIDs:
-
-			// if ies.Value.UENGAPIDs.UENGAPIDPair.AMFUENGAPID.Value == nil {
-			// 	log.Fatal("[GNB][NGAP] AMF UE ID is missing")
-			// }
-			amfUeId = ies.Value.UENGAPIDs.UENGAPIDPair.AMFUENGAPID.Value
-
-			// if ies.Value.UENGAPIDs.UENGAPIDPair.RANUENGAPID.Value == nil {
-			// 	log.Fatal("[GNB][NGAP] RAN UE ID is missing")
-			// 	// TODO SEND ERROR INDICATION
-			// }
+			//amfUeId = ies.Value.UENGAPIDs.UENGAPIDPair.AMFUENGAPID.Value
 			ranUeId = ies.Value.UENGAPIDs.UENGAPIDPair.RANUENGAPID.Value
-
 		}
 	}
 
 	// check RanUeId and get UE.
 	ue, err := gnb.GetGnbUe(ranUeId)
 	if err != nil || ue == nil {
-		log.Fatal("[GNB][NGAP] Error in Pdu Session Resource Setup Request. UE was not found in GNB POOL")
+		log.Info("[GNB][NGAP] Error in UE Context Release Command. UE was not found in GNB POOL")
+		return
 		// TODO SEND ERROR INDICATION
 	}
 
-	// check if AMF UE id.
-	if ue.GetAmfUeId() != amfUeId {
-		log.Fatal("[GNB][NGAP] Error in Pdu Session Resource Setup Request. Problem in AMF UE ID from CORE")
-		// TODO SEND ERROR INDICATION
-	}
-
-	// // check PDU Session NAS PDU.
-	// if message.PDUSessionNASPDU != nil {
-	// 	messageNas = message.PDUSessionNASPDU.Value
-	// } else {
-	// 	log.Fatal("[GNB][NGAP] NAS PDU is missing")
-	// }
-
-	// // send NAS message to UE.
-	// sender.SendToUe(ue, messageNas)
-
-	// send PDU Session Resource Setup Response.
 	trigger.SendUEContextReleaseComplete(ue, gnb)
 	
-	time.Sleep(20 * time.Millisecond)
+
 
 
 	

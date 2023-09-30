@@ -100,6 +100,8 @@ func SendUEContextReleaseComplete(ue *context.GNBUe, gnb *context.GNBContext) {
 	err = sender.SendToAmF(ngapMsg, conn)
 	if err != nil {
 		log.Fatal("[GNB][AMF] Error sending UE Context Release Complete : ", err)
-	}
+	} else {
 	log.Info("[GNB][AMF] Sent UE Context Release Complete to AMF")
+	}
+	
 }

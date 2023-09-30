@@ -27,7 +27,7 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 	msin_int, err = strconv.Atoi(cfg.Ue.Msin)
 	new_msin_int = msin_int + msinOffset
 	cfg.Ue.Msin = strconv.Itoa(new_msin_int)
-    for j:= 1; j<=numGnbs; j++{
+    for j:= 1; j<=numGnbs; j++ {
 		log.Info("[TESTER] INIT GNB ", j)
 		ch := make(chan string)
 		go gnb.InitGnb2(cfg, int(j), &wg, ch)

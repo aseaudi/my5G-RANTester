@@ -248,6 +248,14 @@ func (gnb *GNBContext) getGnbAmf(amfId int64) (*GNBAmf, error) {
 	return amf.(*GNBAmf), nil
 }
 
+func (gnb *GNBContext) GetGnbAmf(amfId int64) (*GNBAmf, error) {
+	amf, err := gnb.amfPool.Load(amfId)
+	if !err {
+		return nil, fmt.Errorf("AMF is not find in GNB AMF POOL ")
+	}
+	return amf.(*GNBAmf), nil
+}
+
 func (gnb *GNBContext) getRanUeIp() uint8 {
 
 	// TODO implement mutex

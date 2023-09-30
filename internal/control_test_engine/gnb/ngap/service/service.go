@@ -92,7 +92,7 @@ func GnbListen(amf *context.GNBAmf, gnb *context.GNBContext) {
 				rem,
 				sctp.InitMsg{NumOstreams: 2, MaxInstreams: 2})
 			if err != nil {
-				amf.SetSCTPConn(nil)
+				//amf.SetSCTPConn(nil)
 				time.Sleep(1 * time.Second)
 				continue
 			}

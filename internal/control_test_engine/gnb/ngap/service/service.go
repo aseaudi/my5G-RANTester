@@ -105,6 +105,7 @@ func GnbListen(amf *context.GNBAmf, gnb *context.GNBContext) {
 				conn_new.SubscribeEvents(sctp.SCTP_EVENT_DATA_IO)
 				sctp_connect = 1
 				log.Info("[GNB][NGAP] SCTP Reconnected OK with AMF ", amf.GetAmfId())
+				log.Info("[GNB][NGAP] SCTPConn = ", conn_new)
 			}
 		if sctp_connect == 1 {
 			conn = amf.GetSCTPConn()

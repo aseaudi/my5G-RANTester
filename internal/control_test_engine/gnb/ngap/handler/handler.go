@@ -330,14 +330,16 @@ func HandlerPduSessionResourceSetupRequest(gnb *context.GNBContext, message *nga
 		return
 		// TODO SEND ERROR INDICATION
 	} else if ue == nil {
-		log.Fatal("[GNB][NGAP] Error: No UE found in GNB UE Pool using RAN UE NGAP ID from Pdu Session Resource Setup Request.")
+		log.Info("[GNB][NGAP] Error: No UE found in GNB UE Pool using RAN UE NGAP ID from Pdu Session Resource Setup Request.")
 		// TODO SEND ERROR INDICATION
+		return
 	}
 
 	// check if AMF UE id.
 	if ue.GetAmfUeId() != amfUeId {
-		log.Fatal("[GNB][NGAP] Error in Pdu Session Resource Setup Request. Problem in AMF UE ID from CORE")
+		log.Info("[GNB][NGAP] Error in Pdu Session Resource Setup Request. Problem in AMF UE ID from CORE")
 		// TODO SEND ERROR INDICATION
+		return
 	}
 
 	// create PDU Session for GNB UE.

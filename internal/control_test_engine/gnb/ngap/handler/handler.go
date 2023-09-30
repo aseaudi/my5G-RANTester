@@ -325,7 +325,9 @@ func HandlerPduSessionResourceSetupRequest(gnb *context.GNBContext, message *nga
 	// check RanUeId and get UE.
 	ue, err := gnb.GetGnbUe(ranUeId)
 	if err != nil {
-		log.Fatal("[GNB][NGAP] Error trying to get UE from GNB UE Pool using RAN UE NGAP ID from Pdu Session Resource Setup Request.")
+		// instead of log.Fatal and exit, let's just ignore this request
+		log.Info("[GNB][NGAP] Error: Failure trying to get UE from GNB UE Pool using RAN UE NGAP ID from Pdu Session Resource Setup Request.")
+		return
 		// TODO SEND ERROR INDICATION
 	} else if ue == nil {
 		log.Fatal("[GNB][NGAP] Error: No UE found in GNB UE Pool using RAN UE NGAP ID from Pdu Session Resource Setup Request.")

@@ -153,6 +153,7 @@ func (gnb *GNBContext) DeleteGnBUeByIp(ip string) {
 func (gnb *GNBContext) GetGnbUe(ranUeId int64) (*GNBUe, error) {
 	ue, err := gnb.uePool.Load(ranUeId)
 	if !err {
+		log.Info("[GNB] Error: UE ", ranUeId, " is not found in GNB ", gnb.GetGnbId(), " UE pool")
 		return nil, fmt.Errorf("UE is not find in GNB UE POOL")
 	}
 	return ue.(*GNBUe), nil

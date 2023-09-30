@@ -21,8 +21,8 @@ func HandlerUeInitialized(ue *context.GNBUe, message []byte, gnb *context.GNBCon
 	// Send Initial UE Message
 	//conn := ue.GetSCTP()
 	amf_id := ue.GetAmfId()
-	amf := gnb.getGnbAmf(amf_id)
-	conn := amf.GetSCTPConn
+	amf := gnb.GetGnbAmf(amf_id)
+	conn := amf.GetSCTPConn()
 	err = sender.SendToAmF(ngap, conn)
 	if err != nil {
 		log.Info("[GNB][AMF] Error sending initial UE message: ", err)

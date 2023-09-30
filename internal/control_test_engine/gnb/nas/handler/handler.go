@@ -12,7 +12,7 @@ func HandlerUeInitialized(ue *context.GNBUe, message []byte, gnb *context.GNBCon
 	// encode NAS message in NGAP.
 	ngap, err := nas_transport.SendInitialUeMessage(message, ue, gnb)
 	if err != nil {
-		log.Info("[GNB][NGAP] Error making initial UE message: ", err)
+		log.Info("[GNB][NAS] Error making initial UE message: ", err)
 	}
 
 	// change state of UE.
@@ -22,7 +22,9 @@ func HandlerUeInitialized(ue *context.GNBUe, message []byte, gnb *context.GNBCon
 	//conn := ue.GetSCTP()
 	amf_id := ue.GetAmfId()
 	amf, _ := gnb.GetGnbAmf(amf_id)
+	log.Info("[GNB][AMF] Sending Initial UE Message to AMF ID ", amf.GetAmfId())
 	conn := amf.GetSCTPConn()
+	log.Info("[GNB][AMF] STPConn = ", )
 	err = sender.SendToAmF(ngap, conn)
 	if err != nil {
 		log.Info("[GNB][AMF] Error sending initial UE message: ", err)

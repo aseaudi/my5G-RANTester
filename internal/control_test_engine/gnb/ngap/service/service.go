@@ -67,6 +67,7 @@ func GnbListen(amf *context.GNBAmf, gnb *context.GNBContext) {
 
 		n, info, err := conn.SCTPRead(buf[:])
 		if err != nil {
+			conn.Close()
 			log.Info("[GNB][NGAP] Error reading SCTP : ", err)
 			log.Info("[GNB][NGAP] Reconnecting with AMF SCTP")
 			//break

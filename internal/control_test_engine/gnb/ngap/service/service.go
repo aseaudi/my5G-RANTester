@@ -92,6 +92,7 @@ func GnbListen(amf *context.GNBAmf, gnb *context.GNBContext) {
 				rem,
 				sctp.InitMsg{NumOstreams: 2, MaxInstreams: 2})
 			if err != nil {
+				log.Info("[GNB][NGAP] Error reconnecting with AMF SCTP, retry again ...")
 				//amf.SetSCTPConn(nil)
 				time.Sleep(1 * time.Second)
 				continue

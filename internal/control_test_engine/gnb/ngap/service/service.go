@@ -66,7 +66,42 @@ func GnbListen(amf *context.GNBAmf, gnb *context.GNBContext) {
 
 		n, info, err := conn.SCTPRead(buf[:])
 		if err != nil {
-			break
+			log.Info("[GNB][NGAP] Error reading SCTP : ", err)
+			log.Info("[GNB][NGAP] Reconnecting with AMF SCTP")
+			//break
+	// check AMF IP and AMF port.
+	remote := fmt.Sprintf("%s:%d", amf.GetAmfIp(), amf.GetAmfPort())
+	local := fmt.Sprintf("%s:%d", gnb.GetGnbIp(), gnb.GetGnbPort())
+
+	rem, err := sctp.ResolveSCTPAddr("sctp", remote)
+	if err != nil {
+		return err
+	}
+	loc, err := sctp.ResolveSCTPAddr("sctp", local)
+	if err != nil {
+		return err
+	}
+
+
+			conn_new, err := sctp.DialSCTPExt(
+				"sctp",
+				loc,
+				rem,
+				sctp.InitMsg{NumOstreams: 2, MaxInstreams: 2})
+			if err != nil {
+				amf.SetSCTPConn(nil)
+				return err
+			}
+		
+			// set streams and other information about TNLA
+		
+			// successful established SCTP (TNLA - N2)
+			amf.SetSCTPConn(conn_new)
+			gnb.SetN2(conn_new)
+		
+			conn_new.SubscribeEvents(sctp.SCTP_EVENT_DATA_IO)
+
+
 		}
 
 		log.Info("[GNB][SCTP] Receive message in ", info.Stream, " stream")

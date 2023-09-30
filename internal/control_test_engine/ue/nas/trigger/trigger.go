@@ -20,6 +20,7 @@ func InitRegistration(ue *context.UEContext) {
 
 	// send to GNB.
 	sender.SendToGnb(ue, registrationRequest)
+	log.Info("[UE][NAS] Sent Registration request to GNB")
 
 	// change the state of ue for deregistered
 	ue.SetStateMM_DEREGISTERED()
@@ -37,6 +38,7 @@ func DeRegister(ue *context.UEContext) {
 
 	// send to GNB.
 	sender.SendToGnb(ue, deRegistrationRequest)
+	log.Info("[UE][NAS] Sent Deregistration Request to GNB")
 
 	// change the state of ue for deregistered
 	ue.SetStateMM_DEREGISTERED()
@@ -51,6 +53,7 @@ func PDUSessionRelease(ue *context.UEContext) {
 	}
 	// send to GNB.
 	sender.SendToGnb(ue, pduSessionReleaseRequest)
+	log.Info("[UE][NAS] Sent PDU Session Release Request to GNB")
 
 	// change the state of ue for deregistered
 	ue.SetStateMM_DEREGISTERED()
@@ -65,6 +68,7 @@ func SendPduSessionReleaseComplete(ue *context.UEContext) {
 	}
 	// send to GNB.
 	sender.SendToGnb(ue, pduSessionReleaseComplete)
+	log.Info("[UE][NAS] Sent PDU Session Release Complete to GNB")
 
 	// change the state of ue for deregistered
 	ue.SetStateMM_DEREGISTERED()

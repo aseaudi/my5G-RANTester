@@ -59,6 +59,7 @@ func HandlerAuthenticationRequest(ue *context.UEContext, message *nas.Message) {
 
 	// sending to GNB
 	sender.SendToGnb(ue, authenticationResponse)
+	log.Info("[UE][NAS] Sent Authentication Response to GNB")
 }
 
 func HandlerSecurityModeCommand(ue *context.UEContext, message *nas.Message) {
@@ -92,6 +93,7 @@ func HandlerSecurityModeCommand(ue *context.UEContext, message *nas.Message) {
 
 	// sending to GNB
 	sender.SendToGnb(ue, securityModeComplete)
+	log.Info("[UE][NAS] Sent Security Mode Complete to GNB")
 }
 
 func HandlerRegistrationAccept(ue *context.UEContext, message *nas.Message) {

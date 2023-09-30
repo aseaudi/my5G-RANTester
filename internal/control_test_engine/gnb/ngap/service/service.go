@@ -105,8 +105,11 @@ func GnbListen(amf *context.GNBAmf, gnb *context.GNBContext) {
 		
 			conn_new.SubscribeEvents(sctp.SCTP_EVENT_DATA_IO)
 			sctp_connect = 1
+			
 		}
-
+		if sctp_connect == 1 {
+			continue
+		}
 		}
 
 		log.Info("[GNB][SCTP] Receive message in ", info.Stream, " stream")

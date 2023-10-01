@@ -36,7 +36,7 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 		wg.Add(1)
 		log.Info("[TESTER] Wait for event GNB NGAP to complete")
 		<-ch
-		log.Info("[TESTER] GNB NGAP complete, proceed with UE Register")
+		log.Info("[TESTER] Received event GNB NGAP complete, proceed with UE Register")
 		//time.Sleep(time.Duration(1) * time.Second)
 		msin :=  cfg.Ue.Msin
 		randNumUes := rand.Intn(numUes) + 1

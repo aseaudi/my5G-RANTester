@@ -516,8 +516,11 @@ func HandlerNgSetupResponse(amf *context.GNBAmf, gnb *context.GNBContext, messag
 			log.Info("[GNB][AMF] List of AMF slices Supported by AMF -- sst:", sst, " sd:", sd)
 		}
 	}
-	gnb.Ch <- "associated"
-
+	log.Info("[GNB] GNB NGAP Setup complete, send event to notify main test")
+	
+	if gnb.Ch != nil {
+		gnb.Ch <- "associated"
+	}
 }
 
 func HandlerNgSetupFailure(amf *context.GNBAmf, gnb *context.GNBContext, message *ngapType.NGAPPDU) {

@@ -34,21 +34,20 @@ func TestMultiUesInQueue(numUes int, numGnbs int, msinOffset int, regPeriod int)
 		ch := make(chan string)
 		go gnb.InitGnb2(cfg, int(j), &wg, ch)
 		wg.Add(1)
+		log.Info("[TESTER] Wait for event GNB NGAP to complete")
 		<-ch
-		
+		log.Info("[TESTER] GNB NGAP complete, proceed with UE Register")
 		//time.Sleep(time.Duration(1) * time.Second)
 		msin :=  cfg.Ue.Msin
 		randNumUes := rand.Intn(numUes) + 1
 		log.Info("[TESTER] TESTING Random Number of UEs = ", randNumUes)
 		for i := 1; i <= randNumUes; i++ {
-
 			imsi := imsiGenerator(i, msin)
 			log.Info("[TESTER] TESTING REGISTRATION USING IMSI ", imsi, " UE")
 			cfg.Ue.Msin = imsi
 			go ue.RegistrationUe2(cfg, uint8(i), j, &wg)
 			wg.Add(1)
 			log.Info("[TESTER] Wait for next UE ", regPeriod, " seconds")
-
 			time.Sleep(time.Duration(regPeriod) * time.Second)
 		}
 		imsi := imsiGenerator(numUes + 1, cfg.Ue.Msin)
